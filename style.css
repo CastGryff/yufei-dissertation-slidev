@@ -808,6 +808,17 @@
   max-width: 48rem;
 }
 
+.section-paper-ref {
+  position: absolute;
+  left: 4.6rem;
+  right: 7.8rem;
+  bottom: 3.05rem;
+  color: var(--muted);
+  font-size: 0.64rem;
+  line-height: 1.25;
+  max-width: 45rem;
+}
+
 .storyline {
   display: grid;
   grid-template-columns: 3.4rem 1.8fr 1.2fr;

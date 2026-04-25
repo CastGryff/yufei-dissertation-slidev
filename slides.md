@@ -223,6 +223,10 @@ class: section-slide
 Characterizing conversational adaptability in role-play interactions.
 </div>
 
+<div class="section-paper-ref">
+Paper: Tao et al., "ChatGPT Role-play Dataset: Analysis of User Motives and Model Naturalness," LREC-COLING 2024.
+</div>
+
 ---
 
 <div class="kicker">CRD Dataset</div>
@@ -308,6 +312,10 @@ class: section-slide
 
 <div class="subtitle mt-6">
 Contextual vs. parametric knowledge in LLM outputs.
+</div>
+
+<div class="section-paper-ref">
+Paper: Tao et al., "When Context Leads but Parametric Memory Follows in Large Language Models," EMNLP 2024.
 </div>
 
 ---
@@ -510,6 +518,10 @@ class: section-slide
 The third study tests whether grounding remains stable when evidence appears later in the prompt and when grounding is evaluated across English, Spanish, and Danish.
 </div>
 
+<div class="section-paper-ref">
+Paper: Tao et al., "Lost-in-the-Later: Framework for Quantifying Contextual Grounding in Large Language Models," RARA at ICDM 2025.
+</div>
+
 ---
 
 <div class="kicker">MultiWikiAtomic + CoPE</div>
@@ -690,6 +702,10 @@ class: section-slide
 
 <div class="subtitle mt-6">
 NWCAD treats context use as a routing problem: reduce context-induced regressions when added context is neutral or distracting, yet still use context when it is genuinely corrective.
+</div>
+
+<div class="section-paper-ref">
+Paper: Tao and Agrawal, "No-Worse Context-Aware Decoding: Preventing Neutral Regression in Context-Conditioned Generation," Findings of ACL 2026.
 </div>
 
 ---
