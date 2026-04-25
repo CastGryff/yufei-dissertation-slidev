@@ -3,6 +3,12 @@ theme: default
 title: Toward Contextual Adaptation and Knowledge Grounding in Large Language Models
 info: |
   Dissertation defense deck for Yufei Tao.
+aspectRatio: 16/9
+canvasWidth: 960
+fonts:
+  sans: Inter
+  mono: Fira Code
+  provider: none
 class: cover-slide
 drawings:
   persist: false
