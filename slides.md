@@ -17,34 +17,39 @@ mdc: true
 ---
 
 <div class="cover-field">
-  <div class="cover-scan" aria-hidden="true"></div>
   <svg class="cover-routes" viewBox="0 0 520 420" preserveAspectRatio="none" aria-hidden="true">
-    <path class="route social" d="M134 100 C155 126 197 142 260 150" />
-    <path class="route informational" d="M386 101 C365 126 323 142 260 150" />
-    <path class="route outcome" d="M260 262 C260 300 260 330 260 359" />
-    <circle class="route-anchor social" cx="134" cy="100" r="2.4" />
-    <circle class="route-anchor informational" cx="386" cy="101" r="2.4" />
-    <circle class="route-anchor node" cx="260" cy="150" r="2.6" />
-    <circle class="route-anchor node" cx="260" cy="262" r="2.6" />
-    <circle class="route-anchor outcome" cx="260" cy="359" r="2.4" />
+    <defs>
+      <path id="cover-social-path" d="M151 142 C177 190 218 215 250 228" />
+      <path id="cover-info-path" d="M369 142 C343 190 302 215 270 228" />
+      <path id="cover-outcome-path" d="M260 292 C260 306 260 318 260 326" />
+    </defs>
+    <path class="route social" d="M151 142 C177 190 218 215 250 228" />
+    <path class="route informational" d="M369 142 C343 190 302 215 270 228" />
+    <path class="route outcome" d="M260 292 C260 306 260 318 260 326" />
+    <circle class="route-packet social" r="4.4">
+      <animateMotion dur="3s" repeatCount="indefinite"><mpath href="#cover-social-path" /></animateMotion>
+    </circle>
+    <circle class="route-packet informational" r="4.4">
+      <animateMotion dur="3.35s" begin=".45s" repeatCount="indefinite"><mpath href="#cover-info-path" /></animateMotion>
+    </circle>
   </svg>
-  <div class="cover-stream social">
-    <div class="cover-label">social context</div>
-    <div class="cover-sub">roles / expectations<br>intentions / norms</div>
+  <div class="cover-symbol social">
+    <PublicAssetImg path="assets/flaticon/tinted/role-blue.png" />
   </div>
-  <div class="cover-stream informational">
-    <div class="cover-label">informational context</div>
-    <div class="cover-sub">passages / facts<br>language-specific cues</div>
+  <div class="cover-symbol informational">
+    <PublicAssetImg path="assets/flaticon/tinted/evidence-green.png" />
   </div>
+  <div class="cover-symbol-label social">ADAPTATION</div>
+  <div class="cover-symbol-label informational">GROUNDING</div>
   <div class="cover-vellum" aria-hidden="true"></div>
   <div class="cover-node">
-    <div>contextual adaptation</div>
-    <div>knowledge grounding</div>
+    <PublicAssetImg path="assets/flaticon/tinted/brain-white.png" />
   </div>
-  <div class="cover-outcome">socially appropriate / informationally faithful</div>
-  <div class="cover-ticks" aria-hidden="true">
-    <span></span><span></span><span></span><span></span><span></span>
+  <div class="cover-symbol-label control">CONTROL</div>
+  <div class="cover-symbol outcome">
+    <PublicAssetImg path="assets/flaticon/tinted/target-amber.png" />
   </div>
+  <div class="cover-symbol-label outcome">RELIABILITY</div>
 </div>
 
 <div class="cover-copy">
@@ -57,7 +62,8 @@ mdc: true
 <div>Portland State University, 2026</div>
 <div class="committee-block">
 <div><span>Chair</span> Dr. Ameeta Agrawal</div>
-<div><span>Committee</span> Dr. Suresh Singh · Dr. Tetyana Sydorenko · Dr. Wu-chi Feng</div>
+<div><span>Committee</span> Dr. Suresh Singh · Dr. Tetyana Sydorenko</div>
+<div><span></span> Dr. Wu-chi Feng</div>
 </div>
 </div>
 </div>
@@ -1082,4 +1088,8 @@ LLMs become more reliable when context moves from being an input that influences
 </div>
 
 <div class="byline mt-12">Thank you.</div>
+
+<div class="asset-credit">
+Title icons made by <a href="https://www.freepik.com">Freepik</a> from <a href="https://www.flaticon.com/">Flaticon</a>.
+</div>
 </div>
