@@ -35,7 +35,7 @@ mdc: true
     <div>contextual adaptation</div>
     <div>knowledge grounding</div>
   </div>
-  <div class="cover-outcome">adaptive / faithful / grounded</div>
+  <div class="cover-outcome">socially appropriate / informationally faithful</div>
   <div class="cover-ticks" aria-hidden="true">
     <span></span><span></span><span></span><span></span><span></span>
   </div>
@@ -46,14 +46,13 @@ mdc: true
 
 # Toward Contextual<br>Adaptation and<br>Knowledge Grounding in<br>Large Language Models
 
-<div class="subtitle mt-5">
-LLMs are expected to adapt to context in ways that are both socially appropriate and informationally faithful.
-</div>
-
 <div class="byline mt-7">
-Yufei Tao<br>
-Doctor of Philosophy in Computer Science<br>
-Portland State University, 2026
+<div class="presenter-name">Yufei Tao</div>
+<div>Portland State University, 2026</div>
+<div class="committee-block">
+<div><span>Chair</span> Dr. Ameeta Agrawal</div>
+<div><span>Committee</span> Dr. Suresh Singh · Dr. Tetyana Sydorenko · Dr. Wu-chi Feng</div>
+</div>
 </div>
 </div>
 
@@ -143,7 +142,7 @@ class: pop-slide
 
 <div class="storyline compact rowed mt-5">
 <div class="story-row" v-click><div><span class="tag blue">1</span></div><div><strong>Role-play interaction</strong></div><div>Social adaptation</div></div>
-<div class="story-row" v-click><div><span class="tag green">2</span></div><div><strong>Contextual vs. parametric knowledge</strong></div><div>Baseline grounding</div></div>
+<div class="story-row" v-click><div><span class="tag green">2</span></div><div><strong>Contextual vs. parametric knowledge</strong></div><div>Knowledge-consistent grounding</div></div>
 <div class="story-row" v-click><div><span class="tag amber">3</span></div><div><strong>Lost-in-the-Later</strong></div><div>Multilingual and positional grounding</div></div>
 <div class="story-row focus" v-click><div><span class="tag red">4</span></div><div><strong>No-Worse Context-Aware Decoding</strong></div><div>Decode-time control</div></div>
 <div class="story-row" v-click><div><span class="tag violet">5</span></div><div><strong>Synthesis</strong></div><div>Context as a control problem</div></div>
@@ -225,7 +224,7 @@ Users in role-play produce longer turns; ChatGPT changes too, but remains system
 </div>
 
 <div class="grid-3 mt-5">
-<div class="tile blue"><h3>Vanilla</h3><p>Natural model responses remain rare: 5.6% overall.</p></div>
+<div class="tile blue"><h3>Vanilla</h3><p>5.6% of ChatGPT responses were labeled natural.</p></div>
 <div class="tile green"><h3>Boss</h3><p>ChatGPT was annotated as natural about half of the time: 52%.</p></div>
 <div class="tile amber"><h3>Classmate</h3><p>ChatGPT was annotated as natural about half of the time: 47%.</p></div>
 </div>
@@ -237,9 +236,9 @@ Users in role-play produce longer turns; ChatGPT changes too, but remains system
 # Social context influences behavior, but does not fully govern it
 
 <div class="grid-3 mt-8">
-<div class="tile blue"><h3>Context works</h3><p>Role-play reorganizes user and model behavior.</p></div>
-<div class="tile amber"><h3>Adaptation is incomplete</h3><p>AI self-framing, too much information, and excessive helpfulness persist.</p></div>
-<div class="tile green"><h3>Next objective</h3><p>Explaining contextual versus parametric knowledge behavior.</p></div>
+<div class="tile blue"><h3>Behavior changes</h3><p>Role-play changes both user behavior and model behavior.</p></div>
+<div class="tile amber"><h3>Adaptation is incomplete</h3><p>Verbosity, over-helpfulness, and partial misreading of user intent persist.</p></div>
+<div class="tile green"><h3>Knowledge grounding</h3><p>The next study examines how models balance contextual and parametric knowledge.</p></div>
 </div>
 
 ---
@@ -340,7 +339,7 @@ Contextual vs. parametric knowledge in LLM outputs.
 <div class="grid-2 mt-6">
 <div>
 <div class="tile green"><h3>CK/PK detection</h3><p>Using the atomic contexts as a reference, atomic responses are categorized as contextual or parametric knowledge with INFUSE.</p></div>
-<div class="tile amber mt-4"><h3>Threshold calibration</h3><p>The threshold is set at 0.5; three annotators reviewed ambiguously scored sentences.</p></div>
+<div class="tile amber mt-4"><h3>Threshold calibration</h3><p>The threshold is set at 0.5; three annotators reviewed a subset of ambiguously scored sentences.</p></div>
 <div class="tile red mt-4"><h3>Hallucination detection</h3><p>Sentences classified as parametric knowledge are further assessed using FActScore.</p></div>
 </div>
 <div class="tile blue">
@@ -353,7 +352,7 @@ Contextual vs. parametric knowledge in LLM outputs.
 <li>Mistral 7B</li>
 <li>Phi-3</li>
 </ul>
-<p class="fine mt-4">Knowledge-consistency is checked with SBERT by comparing the k=0 response and the longest input context.</p>
+<p class="fine mt-4">An SBERT sanity check on five topics suggests high consistency between k=0 responses and the longest input contexts.</p>
 </div>
 </div>
 
@@ -369,7 +368,7 @@ Contextual vs. parametric knowledge in LLM outputs.
 <p>Atomic response content entailed by the supplied context.</p>
 </div>
 <div class="tile amber">
-<h3>Parametric knowledge proxy (PK)</h3>
+<h3>Parametric knowledge (PK)</h3>
 <p>Atomic response content not entailed by the supplied context; factuality is checked separately.</p>
 </div>
 </div>
@@ -392,7 +391,7 @@ LLMs do not simply reproduce the provided evidence: they mix grounded content wi
 <div class="grid-3 evidence-strip mt-4">
 <div class="tile green"><h3>Contextual knowledge</h3><p>Larger contexts generally increase the model's reliance on contextual knowledge.</p></div>
 <div class="tile amber"><h3>Parametric knowledge</h3><p>The average proportion remains similar for k = 30, 40, and 50.</p></div>
-<div class="tile red"><h3>Model difference</h3><p>All models except Phi-3 show consistently similar patterns.</p></div>
+<div class="tile red"><h3>Model difference</h3><p>Most models show similar CK/PK trends; Phi-3 is the main exception in some settings.</p></div>
 </div>
 
 ---
@@ -420,7 +419,7 @@ LLMs do not simply reproduce the provided evidence: they mix grounded content wi
 <div>
 <div class="tile blue"><h3>Method</h3><p>Contexts and responses are divided into four quartiles and compared using cosine similarity of SBERT embeddings.</p></div>
 <div class="tile green mt-4"><h3>Pattern</h3><p>The first context quartile maps most closely to the first, and to a lesser extent, the adjacent response quartile.</p></div>
-<div class="tile amber mt-4"><h3>Interpretation</h3><p>The model prefers to match the positions of data.</p></div>
+<div class="tile amber mt-4"><h3>Interpretation</h3><p>Response order tends to mirror context order.</p></div>
 </div>
 <div class="media-rail"><img src="/assets/context-where-went-gpt4o.png" class="media fit-wide"></div>
 </div>
@@ -439,7 +438,7 @@ LLMs do not simply reproduce the provided evidence: they mix grounded content wi
 
 <div class="grid-3 evidence-strip mt-4">
 <div class="tile blue"><h3>Contextual knowledge</h3><p>Becomes increasingly similar with larger contexts.</p></div>
-<div class="tile amber"><h3>Parametric knowledge</h3><p>Comes from a small pool of knowledge, though not as uniformly homogeneous.</p></div>
+<div class="tile amber"><h3>Parametric knowledge</h3><p>Repeatedly draws on certain pieces of information, though less uniformly than contextual knowledge.</p></div>
 <div class="tile green"><h3>CK/PK similarity</h3><p>Rises to around 0.6, suggesting supplemental rather than unrelated parametric knowledge.</p></div>
 </div>
 
@@ -447,13 +446,13 @@ LLMs do not simply reproduce the provided evidence: they mix grounded content wi
 
 <div class="kicker">Faithfulness</div>
 
-# Hallucination drops early, then unsupported content plateaus
+# FActScore improves with added context and converges early
 
 <div class="grid-2 wide-left mt-5">
 <div class="media-rail"><img src="/assets/factscore.png" class="media tall"></div>
 <div>
 <div class="claim small">Context improves faithfulness.</div>
-<p class="mt-4">Much of the improvement appears early; residual unsupported content remains.</p>
+<p class="mt-4">Residual parametric knowledge remains at larger context sizes.</p>
 <div class="takeaway mt-6">
 Supplied evidence changes model outputs in the expected direction, but not deterministically.
 </div>
@@ -485,7 +484,7 @@ class: section-slide
 # Lost-in-the-Later: multilingual contextual grounding
 
 <div class="subtitle mt-6">
-The third study tests whether grounding remains stable when evidence appears later and must be tracked across languages.
+The third study tests whether grounding remains stable when evidence appears later in the prompt and when grounding is evaluated across English, Spanish, and Danish.
 </div>
 
 ---
@@ -553,7 +552,7 @@ The third study tests whether grounding remains stable when evidence appears lat
 </div>
 
 <div class="takeaway mt-5">
-Most models reach around 70-75 CK in English and Spanish, while Danish is more challenging. Reasoning models remain lower, around 55 CK even with more context.
+Most models reach CK scores around 70-75 in English and Spanish, while Danish is more challenging. Reasoning models remain lower, around 55 CK even with more context.
 </div>
 
 ---
@@ -580,7 +579,7 @@ Most models reach around 70-75 CK in English and Spanish, while Danish is more c
 <div class="grid-2 mt-5">
 <div>
 <table class="table-lite">
-<thead><tr><th>Language</th><th class="num">Q1 exceeds Q4 at 50 contexts</th></tr></thead>
+<thead><tr><th>Language</th><th class="num">Absolute Q1-over-Q4 recall gap at 50 contexts</th></tr></thead>
 <tbody>
 <tr><td>English</td><td class="num">14.63-26.11 pp</td></tr>
 <tr><td>Spanish</td><td class="num">12.63-25.81 pp</td></tr>
@@ -598,7 +597,9 @@ Most models reach around 70-75 CK in English and Spanish, while Danish is more c
 
 <div class="kicker">Prompt-Level Intervention</div>
 
-# A CK prompt improves grounding more than reasoning alone
+# The CK Prompt gives the highest CK scores among tested variants
+
+<div class="fine mt-3">LLaMA 3.2 90B, 50-context setting.</div>
 
 <table class="table-lite mt-5">
 <thead><tr><th>Prompt</th><th class="num">English</th><th class="num">Spanish</th><th class="num">Danish</th></tr></thead>
@@ -613,7 +614,7 @@ Most models reach around 70-75 CK in English and Spanish, while Danish is more c
 </table>
 
 <div class="takeaway mt-5">
-The CK prompt improves CK by +8.4 percentage points absolute, about 12% relative over the original prompt.
+CoT alone does not match the CK Prompt and lowers context recall relative to the best non-CoT prompt variants.
 </div>
 
 ---
@@ -629,7 +630,7 @@ The CK prompt improves CK by +8.4 percentage points absolute, about 12% relative
 </div>
 
 <div class="takeaway mt-8">
-This motivates the final study: a decode-time intervention that preserves correct answers under weak or distracting context while still allowing genuinely helpful evidence to matter.
+This motivates a related decode-time control problem: preserving correct answers under weak or distracting context while allowing genuinely helpful evidence to matter.
 </div>
 
 ---
@@ -679,13 +680,13 @@ The goal is to reduce do-no-harm failures on questions that are already answered
 <div class="trade-point noctx">No-context</div>
 <div class="trade-point ctx">With-context</div>
 <div class="trade-point cad">CAD-style shift</div>
-<div class="trade-point nwcad">NWCAD target</div>
+<div class="trade-point nwcad">NWCAD</div>
 </div>
 
 <div class="grid-2 mt-4">
 <div class="tile blue">
 <h3>Do-no-harm preservation</h3>
-<p>Questions that are already answered correctly without context.</p>
+<p>Preserve baseline-correct answers when added context is neutral or distracting.</p>
 </div>
 <div class="tile green">
 <h3>Context utilization</h3>
@@ -764,7 +765,7 @@ With-context stream:<br>
 </div>
 <div class="tile amber">
 <h3>Fallback</h3>
-<p>If neither stream is decisive, use a CAD-style fallback decoder.</p>
+<p>Otherwise, fall back to the plug-in CAD-style decoder when Stage 1 does not apply and the context stream is not sufficiently confident.</p>
 </div>
 </div>
 
@@ -843,8 +844,8 @@ When the context is non-informative, a decoder should preserve the no-context ou
 <div class="media-rail"><img src="/assets/nwcad-adapter.png" class="media tall"></div>
 <div>
 <div class="tile green"><h3>Plug-in adapter</h3><p>NWCAD can wrap CAD, AdaCAD, or CoCoA by changing the fallback decoder.</p></div>
-<div class="tile amber mt-4"><h3>Where gains come from</h3><p>Largest improvements appear in distractor-heavy settings, with competitive or modest gains elsewhere.</p></div>
-<div class="tile blue mt-4"><h3>Stage 2 matters</h3><p>Full NWCAD improves over the Stage-1-only version by 5.2 percentage points on average.</p></div>
+<div class="tile amber mt-4"><h3>Where gains come from</h3><p>Largest gains come from Restated and Distractor subsets, with Helpful performance preserved or modestly improved.</p></div>
+<div class="tile blue mt-4"><h3>Stage 2 matters</h3><p>Full NWCAD improves over the Stage-1-only version by 5.2% on average.</p></div>
 </div>
 </div>
 
@@ -874,11 +875,11 @@ Token routing uses fallback rarely; "any fallback" reports the fraction of examp
 
 <div class="kicker">Limitations</div>
 
-# What NWCAD does and does not solve
+# What NWCAD reduces and what remains
 
 <div class="grid-2 mt-8">
 <div class="tile green">
-<h3>What it solves</h3>
+<h3>What it reduces</h3>
 <p>Reduces a particular downstream consequence of weak grounding: added context making outputs worse when that context is neutral, distracting, or otherwise unhelpful.</p>
 </div>
 <div class="tile red">
@@ -957,7 +958,7 @@ This reframes role-play, hallucination, multilingual recall, long-context behavi
 
 <div class="kicker">Conclusion</div>
 
-# Contextual adaptation requires measuring whether the right context governs the output
+# Reliable LLM behavior requires measuring whether the right context governs the output
 
 <div class="grid-3 mt-8">
 <div class="tile blue"><h3>Diagnose</h3><p>Measure where context changes behavior and where defaults persist.</p></div>
@@ -991,7 +992,7 @@ Context is no longer only the text that conditions one response. It becomes the 
 <div>
 <div class="claim small">Different agents may retrieve evidence, propose interpretations, summarize findings, critique one another, and update shared state over time.</div>
 <div class="research-target blue mt-5">Evaluation target: whether agents maintain a grounded account of what is known, uncertain, superseded, and evidence-backed.</div>
-<div class="takeaway mt-6">Failures should not enter working knowledge and shape subsequent retrieval, coordination, or synthesis as if already verified.</div>
+<div class="takeaway mt-6">Unsupported or stale claims can enter working knowledge and shape later retrieval, coordination, or synthesis as if verified.</div>
 </div>
 <div class="future-map blue">
 <div class="future-map-title">shared knowledge state</div>

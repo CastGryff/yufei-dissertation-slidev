@@ -500,9 +500,29 @@
   max-width: 27rem;
   border-left: 4px solid rgba(31,95,147,0.72);
   padding-left: 0.72rem;
-  font-size: 0.7rem;
-  line-height: 1.35;
+  font-size: 0.66rem;
+  line-height: 1.28;
   margin-top: 1.18rem !important;
+}
+
+.cover-slide .presenter-name {
+  color: var(--ink);
+  font-size: 0.84rem;
+  font-weight: 820;
+}
+
+.cover-slide .committee-block {
+  margin-top: 0.46rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.cover-slide .committee-block span {
+  display: inline-block;
+  min-width: 6.95rem;
+  color: rgba(31,95,147,0.86);
+  font-weight: 820;
 }
 
 .cover-field {
