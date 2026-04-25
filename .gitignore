@@ -1,0 +1,18 @@
+.DS_Store
+*.log
+
+node_modules/
+dist/
+.playwright-cli/
+output/
+
+# Local exports and working previews
+/dissertation-defense*.pdf
+/dissertation-defense*.pptx
+/slides-export.pdf
+/design-directions.html
+/public/previews/
+
+# Local draft backups
+/slides 2.md
+/style 2.css
