@@ -880,7 +880,26 @@ This turns context-aware decoding from continuous tilting into regime selection.
 <img src="/assets/nwcad-tradeoff.png" class="media tall">
 </div>
 
-<div class="caption">Higher y means better neutral preservation; higher x means better helpful-context accuracy.</div>
+<div class="caption">Controlled augmented NQ-open slices. Each panel is one open-weight backbone; x-axis is Helpful accuracy, and the vertical bar spans Restated and Distractor baseline-correct preservation.</div>
+
+---
+
+<div class="kicker">Qualitative Example</div>
+
+# Qualitative examples: reducing regressions while using helpful context
+
+<table class="table-lite mt-5">
+<thead><tr><th>Slice</th><th>Question</th><th>Bad behavior</th><th>NWCAD behavior</th></tr></thead>
+<tbody>
+<tr><td>Restated</td><td>Dumbledore actor after the first one died</td><td>Contrastive decoders flip to Richard Harris</td><td>Preserves Michael Gambon</td></tr>
+<tr><td>Distractor</td><td>When did the US normalize relations with China?</td><td>Distractor pulls answer toward 1978</td><td>Preserves January 1, 1979</td></tr>
+<tr><td>Helpful</td><td>Voice of the T. rex in The Good Dinosaur</td><td>Baseline gives wrong answer</td><td>Uses context: Sam Elliott</td></tr>
+</tbody>
+</table>
+
+<div class="takeaway mt-6">
+When the context is non-informative and the no-context answer is already correct, a decoder should preserve the no-context output; when context is informative, it should shift toward context to correct the answer.
+</div>
 
 ---
 
@@ -900,21 +919,74 @@ This turns context-aware decoding from continuous tilting into regime selection.
 
 ---
 
-<div class="kicker">Qualitative Example</div>
+<div class="kicker">Component Ablation</div>
 
-# Qualitative examples: reducing regressions while using helpful context
+# Full two-stage NWCAD improves over Stage 1 alone
 
-<table class="table-lite mt-5">
-<thead><tr><th>Slice</th><th>Question</th><th>Bad behavior</th><th>NWCAD behavior</th></tr></thead>
+<div class="grid-2 wide-left mt-5">
+<div class="media-rail">
+<img src="/assets/nwcad-component-ablation.png" class="media fit-wide">
+</div>
+<div>
+<div class="tile blue"><h3>Stage 1 only</h3><p>NWCAD<sub>BC</sub> protects baseline-correct neutral cases.</p></div>
+<div class="tile green mt-4"><h3>Full method</h3><p>Stage 2 adds gains when the decoder should use the context rather than ignore it.</p></div>
+<div class="tile amber mt-4"><h3>Takeaway</h3><p>Adding Stage 2 improves performance across the evaluation suite by 5.2% on average.</p></div>
+</div>
+</div>
+
+---
+
+<div class="kicker">Adapter Ablation</div>
+
+# NWCAD improves existing two-stream decoders when used as a wrapper
+
+<div class="grid-2 wide-left mt-5">
+<div class="media-rail">
+<img src="/assets/nwcad-adapter.png" class="media fit-wide">
+</div>
+<div>
+<div class="tile red"><h3>Largest gains</h3><p>Wrapping CAD and CoCoA gives large improvements because these decoders are more exposed to neutral regression under distractor pressure.</p></div>
+<div class="tile green mt-4"><h3>Fallback is plug-in</h3><p>NWCAD can use CAD, AdaCAD, or CoCoA as the Stage-2 fallback.</p></div>
+<div class="tile blue mt-4"><h3>Interpretation</h3><p>The result supports the adapter view: regime selection improves existing context-aware decoding methods.</p></div>
+</div>
+</div>
+
+---
+
+<div class="kicker">Routing and Cost</div>
+
+# The fallback path is rare, and the latency cost stays small
+
+<div class="grid-2 mt-5">
+<div>
+<table class="table-lite compact">
+<thead><tr><th>Slice</th><th class="num">No-context</th><th class="num">Context</th><th class="num">Fallback</th></tr></thead>
 <tbody>
-<tr><td>Restated</td><td>Dumbledore actor after the first one died</td><td>Contrastive decoders flip to Richard Harris</td><td>Preserves Michael Gambon</td></tr>
-<tr><td>Distractor</td><td>When did the US normalize relations with China?</td><td>Distractor pulls answer toward 1978</td><td>Preserves January 1, 1979</td></tr>
-<tr><td>Helpful</td><td>Voice of the T. rex in The Good Dinosaur</td><td>Baseline gives wrong answer</td><td>Uses context: Sam Elliott</td></tr>
+<tr><td>Restated</td><td class="num">75.14</td><td class="num">23.65</td><td class="num"><strong>1.21</strong></td></tr>
+<tr><td>Distractor</td><td class="num">73.70</td><td class="num">24.35</td><td class="num"><strong>1.95</strong></td></tr>
+<tr><td>Helpful</td><td class="num">63.06</td><td class="num">35.06</td><td class="num"><strong>1.88</strong></td></tr>
+<tr><td>NQ-SYNTH</td><td class="num">49.57</td><td class="num">48.66</td><td class="num"><strong>1.78</strong></td></tr>
+<tr><td>NQ-SWAP</td><td class="num">37.88</td><td class="num">60.26</td><td class="num"><strong>1.86</strong></td></tr>
+<tr><td>HotpotQA-distractor</td><td class="num">60.53</td><td class="num">38.39</td><td class="num"><strong>1.08</strong></td></tr>
 </tbody>
 </table>
+<div class="caption">Routing frequencies (% of generated tokens).</div>
+</div>
+<div>
+<table class="table-lite compact">
+<thead><tr><th>Pair</th><th class="num">QA mean</th><th class="num">ToFuEval</th><th class="num">ExpertQA</th></tr></thead>
+<tbody>
+<tr><td>NWCAD<sub>CAD</sub> / CAD</td><td class="num">0.88</td><td class="num">1.01</td><td class="num">0.99</td></tr>
+<tr><td>NWCAD<sub>AdaCAD</sub> / AdaCAD</td><td class="num">0.99</td><td class="num">1.01</td><td class="num">0.98</td></tr>
+<tr><td>NWCAD<sub>CoCoA</sub> / CoCoA</td><td class="num">0.90</td><td class="num">0.98</td><td class="num">1.01</td></tr>
+</tbody>
+</table>
+<div class="caption">Relative decoding latency; values below 1 are faster than the base decoder.</div>
+</div>
+</div>
 
-<div class="takeaway mt-6">
-When the context is non-informative and the no-context answer is already correct, a decoder should preserve the no-context output; when context is informative, it should shift toward context to correct the answer.
+<div class="takeaway mt-5">
+NWCAD improves reliability mainly by selecting between the no-context and context streams, with contrastive fallback reserved for uncommon uncertain steps.
 </div>
 
 ---
