@@ -356,6 +356,10 @@
   max-height: 18rem;
 }
 
+.crd-naturalness-figures .media.short {
+  max-height: 14.8rem;
+}
+
 .media.tall {
   max-height: 22.5rem;
 }

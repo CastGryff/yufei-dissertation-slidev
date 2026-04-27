@@ -265,7 +265,7 @@ Paper: Tao et al., "ChatGPT Role-play Dataset: Analysis of User Motives and Mode
 
 <div class="kicker">Result 1</div>
 
-# In these CRD role-play settings, interactional rhythm changes
+# Role-play changes conversation rhythm, but not the verbosity gap
 
 <table class="table-lite mt-5">
 <thead>
@@ -288,20 +288,18 @@ Users in role-play produce longer turns; ChatGPT changes too, but remains system
 
 <div class="kicker">Result 2</div>
 
-# Role-play shifts motives and naturalness
+# Role-play raises naturalness, but assistant defaults remain
 
-<div class="grid-2 mt-5">
+<div class="grid-2 crd-naturalness-figures mt-4">
 <div class="media-rail"><img src="/assets/user-motives.png" class="media short"></div>
 <div class="media-rail"><img src="/assets/model-naturalness.png" class="media short"></div>
 </div>
 
-<div class="grid-3 mt-5">
-<div class="tile blue"><h3>Vanilla</h3><p>5.6% of ChatGPT responses were labeled natural.</p></div>
-<div class="tile green"><h3>Boss</h3><p>ChatGPT was annotated as natural about half of the time: 52%.</p></div>
-<div class="tile amber"><h3>Classmate</h3><p>ChatGPT was annotated as natural about half of the time: 47%.</p></div>
+<div class="takeaway mt-4">
+Role cues suppress "as an AI" behavior and increase naturalness; verbosity and over-helpfulness remain.
 </div>
 
-<div class="fine mt-5">Naturalness is a pragmatic annotation of conversational behavior, not a measure of task success or factual correctness.</div>
+<div class="fine mt-3">Naturalness is a pragmatic annotation of conversational behavior, not a measure of task success or factual correctness.</div>
 
 ---
 
