@@ -160,35 +160,7 @@ class: pop-slide
 <div class="story-row" v-click><div><span class="tag violet">5</span></div><div><strong>Synthesis</strong></div><div>Context as a control problem</div></div>
 </div>
 
-<div class="fine mt-5" v-click>The dissertation moves from social adaptation, to evidence grounding, to harder grounding conditions, to decode-time control.</div>
-
----
-
-<div class="kicker">Research Questions</div>
-
-# The four studies answer three connected questions
-
-<div class="grid-3 mt-7">
-<div class="tile blue">
-<h3>RQ1</h3>
-<p>How do LLMs adapt to context, and where does that adaptation fall short?</p>
-<p class="fine mt-4">Study 1 tests social roles; Study 2 tests supplied evidence.</p>
-</div>
-<div class="tile amber">
-<h3>RQ2</h3>
-<p>How stable is knowledge grounding when the conditions become harder?</p>
-<p class="fine mt-4">Study 3 tests later evidence, languages, and conflict with prior knowledge.</p>
-</div>
-<div class="tile red">
-<h3>RQ3</h3>
-<p>Can inference-time intervention improve knowledge grounding without degrading outputs that were already correct?</p>
-<p class="fine mt-4">Study 4 introduces decode-time control.</p>
-</div>
-</div>
-
-<div class="takeaway mt-7">
-The empirical chapters diagnose context use; the intervention chapter tests whether one downstream reliability failure can be reduced at inference time.
-</div>
+<div class="fine mt-5" v-click>The dissertation asks how LLMs adapt to context, how stable grounding is under harder conditions, and whether inference-time control can reduce one reliability failure.</div>
 
 ---
 
@@ -236,30 +208,12 @@ class: section-slide
 Characterizing conversational adaptability in role-play interactions.
 </div>
 
+<div class="fine mt-5">CRD contains 57 participants, 85 conversations, and 1,742 utterances across vanilla, boss, and classmate ChatGPT-3.5 interactions collected in March-April 2023.</div>
+<div class="fine mt-2">First-language labels describe participant diversity, not multilingual model behavior; user motives and model naturalness were annotated with substantial agreement.</div>
+
 <div class="section-paper-ref">
 Paper: Tao et al., "ChatGPT Role-play Dataset: Analysis of User Motives and Model Naturalness," LREC-COLING 2024.
 </div>
-
----
-
-<div class="kicker">CRD Dataset</div>
-
-# Data collection at conversational scale
-
-<div class="grid-4 mt-7">
-<div class="metric"><div class="value">57</div><div class="label">participants</div></div>
-<div class="metric green"><div class="value">85</div><div class="label">unique conversations</div></div>
-<div class="metric amber"><div class="value">1,742</div><div class="label">utterances</div></div>
-<div class="metric violet"><div class="value">15</div><div class="label">self-reported first-language labels</div></div>
-</div>
-
-<div class="grid-3 mt-8">
-<div class="tile blue"><h3>Vanilla</h3><p>Open interaction with ChatGPT "as is" for 5-10 minutes.</p></div>
-<div class="tile amber"><h3>Boss</h3><p>High imposition and unequal power distance.</p></div>
-<div class="tile green"><h3>Classmate</h3><p>More peer-like, reciprocal, and open-ended.</p></div>
-</div>
-
-<div class="fine mt-5">Scope: ChatGPT-3.5 interactions collected in March-April 2023. The 15 first-language labels describe participant diversity, not multilingual model behavior. User motives and model naturalness were annotated with substantial agreement: Fleiss' κ = Vanilla .80 / Boss .69 / Classmate .63.</div>
 
 ---
 
@@ -346,7 +300,12 @@ Paper: Tao et al., "When Context Leads but Parametric Memory Follows in Large La
 </div>
 </div>
 
-<div class="takeaway mt-8">
+<div class="grid-2 evidence-strip mt-5">
+<div class="tile green"><h3>Test item</h3><p>Topic, k atomic context sentences, open-ended question, and atomized model response.</p></div>
+<div class="tile blue"><h3>Knowledge-consistent setting</h3><p>Older Wikipedia contexts test grounding without deliberately contradicting model prior knowledge.</p></div>
+</div>
+
+<div class="takeaway mt-5">
 The evaluation asks which generated claims are supported by the supplied context and which generated claims go beyond it.
 </div>
 
@@ -354,31 +313,9 @@ The evaluation asks which generated claims are supported by the supplied context
 
 ---
 
-<div class="kicker">Study 2 Framing</div>
-
-# The task is open-ended question answering in a knowledge-consistent setting
-
-<div class="grid-2 mt-7">
-<div class="tile green">
-<h3>Test item</h3>
-<ul class="test-list">
-<li><strong>Topic</strong>: the title of the Wikipedia article.</li>
-<li><strong>Context</strong>: k atomic sentences provided in a prompt.</li>
-<li><strong>Question</strong>: "With this information, tell me about {Topic}".</li>
-<li><strong>Response</strong>: the model response is then atomized.</li>
-</ul>
-</div>
-<div class="tile green">
-<h3>Non-conflict setting</h3>
-<p>Wikipedia is used as a knowledge-consistent benchmark because older articles are plausibly compatible with model prior knowledge, supported by a limited sanity check.</p>
-</div>
-</div>
-
----
-
 <div class="kicker">WikiAtomic Construction</div>
 
-# WikiAtomic controls context length with atomic sentences
+# WikiAtomic controls context length and supports atomic CK/PK evaluation
 
 <div class="grid-4 mt-6">
 <div class="metric blue"><div class="value">200</div><div class="label">Wikipedia articles</div></div>
@@ -387,37 +324,13 @@ The evaluation asks which generated claims are supported by the supplied context
 <div class="metric red"><div class="value">4,000</div><div class="label">topic-context instances</div></div>
 </div>
 
-<div class="grid-2 mt-7">
-<div class="tile blue" v-click><h3>Articles</h3><p>High-quality Wikipedia articles, each over 1000 words, covering diverse topics from science and technology to history, culture, and prominent figures.</p></div>
-<div class="tile green" v-click><h3>Context sizes</h3><p>For each topic, contexts use increments of 2 sentences from 2 to 30, followed by increments of 5 sentences until 50.</p></div>
+<div class="grid-3 evidence-strip mt-5">
+<div class="tile blue" v-click><h3>Construction</h3><p>High-quality Wikipedia articles are decomposed into atomic sentences; context sizes grow from 2 to 50 sentences.</p></div>
+<div class="tile green" v-click><h3>Scoring</h3><p>Model responses are atomized and compared against atomic contexts with INFUSE at threshold 0.5.</p></div>
+<div class="tile amber" v-click><h3>Models</h3><p>GPT-4o, Claude 3, Llama 3, Mixtral, Mistral, and Phi-3.</p></div>
 </div>
 
-<div class="fine mt-5">Validation: 1,000 atomic sentences were manually verified; only 12 were insufficiently atomic or had their meaning changed.</div>
-
----
-
-<div class="kicker">Evaluation Setup</div>
-
-# The evaluation compares atomic contexts with atomic responses
-
-<div class="grid-2 mt-6">
-<div>
-<div class="tile blue"><h3>Response atomization</h3><p>Model responses are converted into atomic sentences using the same atomization process as the input context.</p></div>
-<div class="tile green mt-4"><h3>CK/PK detection</h3><p>Using the atomic contexts as a reference, atomic responses are categorized as contextual or parametric knowledge with INFUSE.</p></div>
-<div class="tile amber mt-4"><h3>Threshold calibration</h3><p>The threshold is set at 0.5; three annotators reviewed a subset of ambiguously scored sentences.</p></div>
-</div>
-<div class="tile blue">
-<h3>Models</h3>
-<ul class="model-list">
-<li>GPT-4o</li>
-<li>Claude 3 Opus, Sonnet, Haiku</li>
-<li>Llama 3 70B and 8B</li>
-<li>Mixtral 8x22B</li>
-<li>Mistral 7B</li>
-<li>Phi-3</li>
-</ul>
-</div>
-</div>
+<div class="fine mt-5">Validation: 1,000 atomic sentences were manually verified; only 12 were insufficiently atomic or had their meaning changed. Threshold calibration: three annotators reviewed ambiguous INFUSE scores.</div>
 
 ---
 
@@ -548,26 +461,7 @@ Paper: Tao et al., "Lost-in-the-Later: Framework for Quantifying Contextual Grou
 <div class="tile amber"><h3>Measure recall position</h3><p>Entailed response atoms are traced back to context segments to estimate early, middle, and later evidence use.</p></div>
 </div>
 
-<div class="fine mt-3">CoPE reports a contextual knowledge score and a context recall distribution as calibrated behavioral estimates of grounding, not mechanistic measures.</div>
-
----
-
-<div class="kicker">Scale</div>
-
-# A multilingual behavioral probe
-
-<div class="grid-4 mt-7">
-<div class="metric"><div class="value">6</div><div class="label">models</div></div>
-<div class="metric green"><div class="value">3</div><div class="label">languages</div></div>
-<div class="metric amber"><div class="value">10,800</div><div class="label">question-response pairs</div></div>
-<div class="metric red"><div class="value">0.7</div><div class="label">calibrated entailment threshold</div></div>
-</div>
-
-<div class="grid-3 mt-8">
-<div class="tile blue"><h3>Large models</h3><p>GPT-4o and Gemini 1.5 Pro.</p></div>
-<div class="tile green"><h3>Open-weights LLMs</h3><p>Llama 3.2 90B and Llama 3.2 3B.</p></div>
-<div class="tile amber"><h3>Reasoning models</h3><p>GPT-o3 and Qwen 3 235B.</p></div>
-</div>
+<div class="fine mt-3">Scale: 6 models, 3 languages, 10,800 question-response pairs, and calibrated entailment threshold 0.7. CoPE reports contextual knowledge score and context recall distribution as behavioral estimates of grounding.</div>
 
 ---
 
@@ -1040,19 +934,8 @@ NWCAD improves reliability mainly by selecting between the no-context and contex
 <div><span class="tag red">Decoding</span></div><div>Control can shift behavior</div><div>It does not erase deeper instability</div>
 </div>
 
----
-
-<div class="kicker">Implications</div>
-
-# Trustworthy behavior should be evaluated less by fluent output alone and more by contextual constraint
-
-<div class="grid-2 mt-8">
-<div class="claim small">Not just: "Is the output fluent?"</div>
-<div class="claim small">But: "Did the right context constrain the output?"</div>
-</div>
-
-<div class="takeaway mt-8">
-This reframes role-play, hallucination, multilingual recall, later-context behavior, and decoding control as connected symptoms of one context-use problem.
+<div class="takeaway mt-5">
+The evaluation target is not just fluent output, but whether the right context constrained the output.
 </div>
 
 ---
@@ -1068,29 +951,8 @@ This reframes role-play, hallucination, multilingual recall, later-context behav
 <div class="tile red"><h3>Decode-time control</h3><p>NWCAD reduces neutral regression while preserving context utilization.</p></div>
 </div>
 
----
-
-<div class="kicker">Answers to the RQs</div>
-
-# What the dissertation shows
-
-<div class="grid-3 mt-7">
-<div class="tile blue">
-<h3>RQ1: adaptation</h3>
-<p>LLMs adapt to role cues and supplied evidence, but adaptation remains incomplete and uneven.</p>
-</div>
-<div class="tile amber">
-<h3>RQ2: stability</h3>
-<p>Grounding becomes less stable when evidence appears later, must be tracked across languages, or conflicts with likely model/world knowledge.</p>
-</div>
-<div class="tile red">
-<h3>RQ3: intervention</h3>
-<p>Decode-time control can reduce neutral regression while preserving helpful-context use in bounded settings.</p>
-</div>
-</div>
-
-<div class="takeaway mt-7">
-The dissertation therefore supports the central claim: context influences current LLMs, but it does not reliably govern them.
+<div class="takeaway mt-5">
+Together, these contributions support the central claim: context influences current LLMs, but it does not reliably govern them.
 </div>
 
 ---
