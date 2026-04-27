@@ -90,12 +90,12 @@ mdc: true
 <div class="motivation-example mt-5">
 <div class="example-label">Example</div>
 <div class="example-card blue">
-<strong>Role cue</strong>
-<span>"Let's role-play that you are my boss Lisa. I need to ask for an extension."</span>
+<strong>Social context</strong>
+<span>A learner needs to decline an advisor's request without sounding rude. The reply must preserve the refusal while adapting to role relation and politeness expectations.</span>
 </div>
 <div class="example-card green">
-<strong>Evidence cue</strong>
-<span>Passage: "The deadline moved to Friday." Question: "When is it due?"</span>
+<strong>Informational context</strong>
+<span>A long retrieved context first states an older policy, then later says it was revised. The answer must follow the later evidence, not the earlier or memorized answer.</span>
 </div>
 </div>
 
@@ -177,15 +177,47 @@ class: pop-slide
 
 # Publications from this doctoral work
 
-<div class="pub-list mt-5">
-<div class="pub-row"><span>2026</span><div><strong>Tao & Agrawal.</strong> No-Worse Context-Aware Decoding. Findings of ACL.</div></div>
-<div class="pub-row"><span>2025</span><div><strong>Pokharel, Tao, & Agrawal.</strong> CAPO. IJCNLP-AACL Findings.</div></div>
-<div class="pub-row"><span>2025</span><div><strong>Tao, Hiatt, Seetharaman, & Agrawal.</strong> Lost-in-the-Later. RARA at ICDM.</div></div>
-<div class="pub-row"><span>2024</span><div><strong>Tao, Hiatt, Haake, Jetter, & Agrawal.</strong> When Context Leads but Parametric Memory Follows. EMNLP.</div></div>
-<div class="pub-row"><span>2024</span><div><strong>Jetter, Agrawal, Hongchai, Weber, & Tao.</strong> Training Practitioners for Real-time Product Development Using Generative Artificial Intelligence. PICMET.</div></div>
-<div class="pub-row"><span>2024</span><div><strong>Tao, Agrawal, Dombi, Sydorenko, & Lee.</strong> ChatGPT Role-play Dataset. LREC-COLING.</div></div>
-<div class="pub-row"><span>2024</span><div><strong>Sydorenko, Dombi, Agrawal, Thorne, Lee, & Tao.</strong> Spoken Dialogue Systems and ChatGPT for Second Language Pragmatics Research. Routledge Handbook chapter.</div></div>
-<div class="pub-row"><span>2024</span><div><strong>Tao, Mines, & Agrawal.</strong> Making a Long Story Short in Conversation Modeling. TEICAI at EACL.</div></div>
+<div class="pub-list citation-list mt-4">
+<div class="pub-entry">
+<div class="pub-title">No-Worse Context-Aware Decoding: Preventing Neutral Regression in Context-Conditioned Generation</div>
+<div class="pub-authors">Yufei Tao, Ameeta Agrawal</div>
+<div class="pub-venue">In Findings of the Association for Computational Linguistics (ACL), 2026</div>
+</div>
+<div class="pub-entry">
+<div class="pub-title">CAPO: Confidence Aware Preference Optimization Learning for Multilingual Preferences</div>
+<div class="pub-authors">Rhitabrat Pokharel, Yufei Tao, Ameeta Agrawal</div>
+<div class="pub-venue">International Joint Conference on Natural Language Processing & Asia-Pacific Chapter of the Association for Computational Linguistics (IJCNLP & AACL), 2025</div>
+</div>
+<div class="pub-entry">
+<div class="pub-title">"Lost-in-the-Later": Framework for Quantifying Contextual Grounding in Large Language Models</div>
+<div class="pub-authors">Yufei Tao, Adam Hiatt, Rahul Seetharaman, Ameeta Agrawal</div>
+<div class="pub-venue">Grounding Documents with Reasoning, Agents, Retrieval, and Attribution at IEEE International Conference on Data Mining (ICDM), 2025</div>
+</div>
+<div class="pub-entry">
+<div class="pub-title">When Context Leads but Parametric Memory Follows in Large Language Models</div>
+<div class="pub-authors">Yufei Tao, Adam Hiatt, Erik Haake, Antonie J. Jetter, Ameeta Agrawal</div>
+<div class="pub-venue">Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing (EMNLP), 2024.</div>
+</div>
+<div class="pub-entry">
+<div class="pub-title">Training Practitioners for Real-time Product Development Using Generative Artificial Intelligence</div>
+<div class="pub-authors">Antonie J. Jetter, Ameeta Agrawal, Dahm Mongkol Hongchai, Charles M. Weber, and Yufei Tao.</div>
+<div class="pub-venue">2024 Portland International Conference on Management of Engineering and Technology (PICMET), pp. 1-11. IEEE, 2024.</div>
+</div>
+<div class="pub-entry">
+<div class="pub-title">ChatGPT Role-play Dataset: Analysis of User Motives and Model Naturalness</div>
+<div class="pub-authors">Yufei Tao, Ameeta Agrawal, Judit Dombi, Tetyana Sydorenko, Jung In Lee.</div>
+<div class="pub-venue">Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING), 2024.</div>
+</div>
+<div class="pub-entry">
+<div class="pub-title">Spoken Dialogue Systems and ChatGPT for Second Language Pragmatics Research</div>
+<div class="pub-authors">Tetyana Sydorenko, Judit Dombi, Ameeta Agrawal, Steven Thorne, Jung In Lee, Yufei Tao</div>
+<div class="pub-venue">Chapter 29 in Routledge Handbook of Technological Advances in Researching Language Learning, Routledge, 2024, pp. 378-391.</div>
+</div>
+<div class="pub-entry">
+<div class="pub-title">Making a Long Story Short in Conversation Modeling</div>
+<div class="pub-authors">Yufei Tao, Tiernan Mines, Ameeta Agrawal.</div>
+<div class="pub-venue">Towards Ethical and Inclusive Conversational AI (TEICAI) at EACL 2024.</div>
+</div>
 </div>
 
 ---

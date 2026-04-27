@@ -363,9 +363,10 @@
 }
 
 .motivation-example .example-card span {
+  display: block;
   color: var(--muted);
-  font-size: 0.76rem;
-  line-height: 1.24;
+  font-size: 0.69rem;
+  line-height: 1.18;
 }
 
 .context-map {
@@ -516,6 +517,42 @@
 
 .pub-row strong {
   color: var(--ink);
+}
+
+.citation-list {
+  padding: 0.16rem 0.7rem;
+  overflow: visible;
+}
+
+.pub-entry {
+  padding: 0.34rem 0 0.38rem;
+  border-top: 1px solid rgba(22,27,34,0.1);
+}
+
+.pub-entry:first-child {
+  border-top: 0;
+}
+
+.pub-title {
+  color: var(--ink);
+  font-size: 0.62rem;
+  font-weight: 820;
+  line-height: 1.12;
+}
+
+.pub-authors {
+  margin-top: 0.08rem;
+  color: var(--blue);
+  font-size: 0.54rem;
+  font-weight: 780;
+  line-height: 1.1;
+}
+
+.pub-venue {
+  margin-top: 0.08rem;
+  color: var(--muted);
+  font-size: 0.51rem;
+  line-height: 1.1;
 }
 
 .atom-definition {
