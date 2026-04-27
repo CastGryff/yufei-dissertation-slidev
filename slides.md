@@ -192,23 +192,36 @@ The empirical chapters diagnose context use; the intervention chapter tests whet
 
 ---
 
-<div class="kicker">Positioning</div>
+<div class="kicker">Related Work</div>
 
-# Prior work studies these context problems mostly in isolation
+# How each study extends prior work
 
-<div class="grid-3 mt-6">
-<div class="tile blue"><h3>Conversational adaptability</h3><p>Role-play and dialogue research study whether models reflect social expectations and human conversational norms.</p></div>
-<div class="tile green"><h3>Contextual grounding</h3><p>Grounded generation research studies how models reconcile supplied context with knowledge stored in their parameters.</p></div>
-<div class="tile amber"><h3>Long-context recall</h3><p>Long-context research shows that expanding the context window does not guarantee uniform use of information inside it.</p></div>
+<div class="related-work mt-5">
+<div class="rw-head"><div>Study</div><div>Prior work</div><div>This dissertation</div></div>
+<div class="rw-row">
+<div class="rw-paper blue">Role-play interaction</div>
+<div>Prior work in human-computer interaction and pragmatics studies how people transfer social expectations to machines.</div>
+<div>This study introduces CRD and measures user motives and model naturalness across vanilla, boss, and classmate interactions.</div>
+</div>
+<div class="rw-row">
+<div class="rw-paper green">Contextual vs. parametric knowledge</div>
+<div>Prior work on grounded generation, factuality, and claim-level evaluation often focuses on conflict between supplied context and model memory.</div>
+<div>This study uses knowledge-consistent settings and atomic sentences to classify response content as contextual or parametric.</div>
+</div>
+<div class="rw-row">
+<div class="rw-paper amber">Lost-in-the-Later</div>
+<div>Prior work on long-context modeling shows that models do not use all positions in the context window equally.</div>
+<div>This study measures multilingual contextual grounding when relevant evidence appears later in the context.</div>
+</div>
+<div class="rw-row">
+<div class="rw-paper red">No-Worse Context-Aware Decoding</div>
+<div>Prior work on context-aware decoding is designed to improve grounding by contrasting with-context and no-context distributions.</div>
+<div>This study adds decode-time control that reduces neutral regression while preserving helpful-context use in evaluated settings.</div>
+</div>
 </div>
 
-<div class="grid-2 mt-4">
-<div class="tile violet"><h3>Faithfulness evaluation</h3><p>Atomic-claim evaluation makes it possible to ask whether individual claims are supported by the provided context.</p></div>
-<div class="tile red"><h3>Inference-time control</h3><p>Context-aware decoding asks whether reliability can be improved at generation time without making outputs worse overall.</p></div>
-</div>
-
-<div class="takeaway mt-5">
-This dissertation brings these concerns together: social adaptation, informational grounding, multilingual positional grounding, and decode-time reliability control.
+<div class="takeaway mt-4">
+Together, these studies move from social context, to informational grounding, to multilingual positional grounding, to decode-time control.
 </div>
 
 ---

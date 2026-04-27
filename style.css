@@ -255,6 +255,65 @@
 .accent-red { color: var(--red); }
 .accent-violet { color: var(--violet); }
 
+.related-work {
+  border: 1px solid rgba(22,27,34,0.13);
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.94);
+  box-shadow: 0 16px 34px rgba(47,64,82,0.07);
+}
+
+.rw-head,
+.rw-row {
+  display: grid;
+  grid-template-columns: 0.9fr 1.45fr 1.45fr;
+}
+
+.rw-head {
+  background: rgba(244,248,252,0.96);
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 820;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rw-head > div,
+.rw-row > div {
+  padding: 0.5rem 0.7rem;
+  border-right: 1px solid rgba(22,27,34,0.1);
+}
+
+.rw-head > div:last-child,
+.rw-row > div:last-child {
+  border-right: 0;
+}
+
+.rw-row {
+  min-height: 4.75rem;
+  border-top: 1px solid rgba(22,27,34,0.1);
+  color: var(--ink);
+  font-size: 0.76rem;
+  line-height: 1.24;
+}
+
+.rw-row > div {
+  display: flex;
+  align-items: center;
+}
+
+.rw-paper {
+  font-weight: 860;
+  font-size: 0.78rem;
+  line-height: 1.15;
+  border-left: 5px solid var(--blue);
+}
+
+.rw-paper.blue { border-left-color: var(--blue); color: var(--blue); }
+.rw-paper.green { border-left-color: var(--green); color: var(--green); }
+.rw-paper.amber { border-left-color: var(--amber); color: var(--amber); }
+.rw-paper.red { border-left-color: var(--red); color: var(--red); }
+
 .metric {
   border-top: 4px solid var(--blue);
   background: var(--surface-strong);
