@@ -59,11 +59,11 @@ mdc: true
 
 <div class="byline mt-7">
 <div class="presenter-name">Yufei Tao</div>
-<div>Portland State University, 2026</div>
+<div>Dissertation Defense · April 2026</div>
+<div>Department of Computer Science · Portland State University</div>
 <div class="committee-block">
 <div><span>Chair</span> Dr. Ameeta Agrawal</div>
-<div><span>Committee</span> Dr. Suresh Singh · Dr. Tetyana Sydorenko</div>
-<div><span></span> Dr. Wu-chi Feng</div>
+<div><span>Committee</span> Dr. Suresh Singh · Dr. Tetyana Sydorenko · Dr. Wu-chi Feng</div>
 </div>
 </div>
 </div>
@@ -74,10 +74,10 @@ mdc: true
 
 # As LLMs move from research benchmarks into real-world applications, the demands on them change
 
-<div class="grid-2 mt-7">
+<div class="grid-2 mt-5">
 <div class="tile green">
 <h3>Faithful to the material it was given</h3>
-<p>A model that summarizes a legal document, assists a medical professional, or answers questions in a retrieval-augmented pipeline is expected to stay faithful to the material it was given.</p>
+<p>A model that summarizes a legal document, assists a medical professional, or answers questions in a retrieval-augmented pipeline is expected to use the supplied evidence.</p>
 </div>
 <div class="tile blue">
 <h3>Fits the social situation</h3>
@@ -85,40 +85,47 @@ mdc: true
 </div>
 </div>
 
-<div class="takeaway mt-7">
-What matters is not just fluency but whether the model lets the relevant context shape what it says. A plausible answer can still fail if the relevant role or evidence does not govern the output.
+<div class="motivation-example mt-5">
+<div class="example-label">Example</div>
+<div class="example-card blue">
+<strong>Role cue</strong>
+<span>"Let's role-play that you are my boss Lisa. I need to ask for an extension."</span>
+</div>
+<div class="example-card green">
+<strong>Evidence cue</strong>
+<span>Passage: "The deadline moved to Friday." Question: "When is it due?"</span>
+</div>
+</div>
+
+<div class="takeaway mt-5">
+The same reliability question appears in both cases: does the relevant context constrain the output?
 </div>
 
 ---
 
 <div class="kicker">Two Meanings of Context</div>
 
-# Context has two complementary meanings
+# Context leads to two reliability targets
 
-<div class="grid-2 mt-7">
-<div class="tile blue">
-<h3>Social context</h3>
-<p>Roles, expectations, intentions, and norms that shape an interaction.</p>
+<div class="context-map mt-7">
+<div class="context-path blue">
+<div class="context-source">Social context</div>
+<div class="context-terms">roles · expectations · intentions · norms</div>
+<div class="context-arrow">leads to</div>
+<div class="context-target">Contextual adaptation</div>
+<div class="context-desc">behavior that fits the social situation</div>
 </div>
-<div class="tile green">
-<h3>Informational context</h3>
-<p>Passages, facts, and language-specific cues that should ground a response at inference time.</p>
-</div>
-</div>
-
-<div class="grid-2 mt-6">
-<div class="tile blue">
-<h3>Contextual adaptation</h3>
-<p>Adjusting behavior to fit the social situation of an interaction such as its roles, tone, and interactional expectations.</p>
-</div>
-<div class="tile green">
-<h3>Knowledge grounding</h3>
-<p>Anchoring factual claims in provided evidence rather than defaulting to parametric memory.</p>
+<div class="context-path green">
+<div class="context-source">Informational context</div>
+<div class="context-terms">passages · facts · language-specific cues</div>
+<div class="context-arrow">leads to</div>
+<div class="context-target">Knowledge grounding</div>
+<div class="context-desc">claims anchored in supplied evidence</div>
 </div>
 </div>
 
 <div class="takeaway mt-6">
-In the settings studied here, reliability requires evaluating both.
+The dissertation treats both as complementary requirements for reliable LLM behavior.
 </div>
 
 ---
@@ -127,21 +134,21 @@ class: pop-slide
 
 <div class="kicker">Central Claim</div>
 
-# Across the models and settings studied here, LLMs are context-sensitive but not fully context-governed
+# Across the models and settings studied here, LLMs are context-sensitive, yet context only partially governs their outputs
 
 <div class="grid-2 wide-right mt-7">
-<div class="tile blue" v-click>
+<div class="tile blue">
 <h3>They respond to context</h3>
 <p>Current LLMs respond to role cues, supplied evidence, prompt structure, and decode-time controls.</p>
 </div>
-<div class="tile amber" v-click>
-<h3>They do so incompletely and unevenly</h3>
+<div class="tile amber">
+<h3>The response is uneven</h3>
 <p>Context acts less like a hard boundary on behavior than like a competing signal.</p>
 </div>
 </div>
 
-<div class="takeaway mt-7" v-click>
-Together, the four studies move from diagnosing failures of contextual adaptation to a bounded decode-time intervention for one downstream reliability failure.
+<div class="takeaway mt-7">
+Together, the four studies move from empirical diagnosis to a bounded decode-time intervention for one downstream reliability problem.
 </div>
 
 ---
@@ -153,14 +160,31 @@ class: pop-slide
 # From diagnosis to intervention
 
 <div class="storyline compact rowed mt-5">
-<div class="story-row" v-click><div><span class="tag blue">1</span></div><div><strong>Role-play interaction</strong></div><div>Social adaptation</div></div>
-<div class="story-row" v-click><div><span class="tag green">2</span></div><div><strong>Contextual vs. parametric knowledge</strong></div><div>Knowledge-consistent grounding</div></div>
-<div class="story-row" v-click><div><span class="tag amber">3</span></div><div><strong>Lost-in-the-Later</strong></div><div>Multilingual and positional grounding</div></div>
-<div class="story-row focus" v-click><div><span class="tag red">4</span></div><div><strong>No-Worse Context-Aware Decoding</strong></div><div>Decode-time control</div></div>
-<div class="story-row" v-click><div><span class="tag violet">5</span></div><div><strong>Synthesis</strong></div><div>Context as a control problem</div></div>
+<div class="story-row"><div><span class="tag blue">1</span></div><div><strong>Role-play interaction</strong></div><div>Social adaptation</div></div>
+<div class="story-row"><div><span class="tag green">2</span></div><div><strong>Contextual vs. parametric knowledge</strong></div><div>Knowledge-consistent grounding</div></div>
+<div class="story-row"><div><span class="tag amber">3</span></div><div><strong>Lost-in-the-Later</strong></div><div>Multilingual and positional grounding</div></div>
+<div class="story-row focus"><div><span class="tag red">4</span></div><div><strong>No-Worse Context-Aware Decoding</strong></div><div>Decode-time control</div></div>
+<div class="story-row"><div><span class="tag violet">5</span></div><div><strong>Synthesis</strong></div><div>Context as a control problem</div></div>
 </div>
 
-<div class="fine mt-5" v-click>The dissertation asks how LLMs adapt to context, how stable grounding is under harder conditions, and whether inference-time control can reduce one reliability failure.</div>
+<div class="fine mt-5">The dissertation asks how LLMs adapt to context, how stable grounding is under harder conditions, and whether inference-time control can reduce one reliability failure.</div>
+
+---
+
+<div class="kicker">Publications</div>
+
+# Publications from this doctoral work
+
+<div class="pub-list mt-5">
+<div class="pub-row"><span>2026</span><div><strong>Tao & Agrawal.</strong> No-Worse Context-Aware Decoding. Findings of ACL.</div></div>
+<div class="pub-row"><span>2025</span><div><strong>Pokharel, Tao, & Agrawal.</strong> CAPO. IJCNLP-AACL Findings.</div></div>
+<div class="pub-row"><span>2025</span><div><strong>Tao, Hiatt, Seetharaman, & Agrawal.</strong> Lost-in-the-Later. RARA at ICDM.</div></div>
+<div class="pub-row"><span>2024</span><div><strong>Tao, Hiatt, Haake, Jetter, & Agrawal.</strong> When Context Leads but Parametric Memory Follows. EMNLP.</div></div>
+<div class="pub-row"><span>2024</span><div><strong>Jetter, Agrawal, Hongchai, Weber, & Tao.</strong> Training Practitioners for Real-time Product Development Using Generative Artificial Intelligence. PICMET.</div></div>
+<div class="pub-row"><span>2024</span><div><strong>Tao, Agrawal, Dombi, Sydorenko, & Lee.</strong> ChatGPT Role-play Dataset. LREC-COLING.</div></div>
+<div class="pub-row"><span>2024</span><div><strong>Sydorenko, Dombi, Agrawal, Thorne, Lee, & Tao.</strong> Spoken Dialogue Systems and ChatGPT for Second Language Pragmatics Research. Routledge Handbook chapter.</div></div>
+<div class="pub-row"><span>2024</span><div><strong>Tao, Mines, & Agrawal.</strong> Making a Long Story Short in Conversation Modeling. TEICAI at EACL.</div></div>
+</div>
 
 ---
 
@@ -172,29 +196,27 @@ class: pop-slide
 <div class="rw-head"><div>Study</div><div>Prior work</div><div>This dissertation</div></div>
 <div class="rw-row">
 <div class="rw-paper blue">Role-play interaction</div>
-<div>Prior work in human-computer interaction and pragmatics studies how people transfer social expectations to machines.</div>
-<div>This study introduces CRD and measures user motives and model naturalness across vanilla, boss, and classmate interactions.</div>
+<div>Dialogue systems, CASA, Gricean pragmatics, and accommodation theory study social expectations in interaction.</div>
+<div>We introduced the CRD dataset and measured user motives and model naturalness across various roles.</div>
 </div>
 <div class="rw-row">
 <div class="rw-paper green">Contextual vs. parametric knowledge</div>
-<div>Prior work on grounded generation, factuality, and claim-level evaluation often focuses on conflict between supplied context and model memory.</div>
-<div>This study uses knowledge-consistent settings and atomic sentences to classify response content as contextual or parametric.</div>
+<div>RAG, knowledge-conflict studies, and factuality metrics study grounding, memory, and claim-level support.</div>
+<div>We introduced WikiAtomic and classified atomic response content as contextual or parametric in knowledge-consistent QA.</div>
 </div>
 <div class="rw-row">
 <div class="rw-paper amber">Lost-in-the-Later</div>
-<div>Prior work on long-context modeling shows that models do not use all positions in the context window equally.</div>
-<div>This study measures multilingual contextual grounding when relevant evidence appears later in the context.</div>
+<div>Long-context work such as Lost in the Middle shows that position changes retrieval and use.</div>
+<div>We proposed CoPE and MultiWikiAtomic to measure multilingual, positional grounding.</div>
 </div>
 <div class="rw-row">
 <div class="rw-paper red">No-Worse Context-Aware Decoding</div>
-<div>Prior work on context-aware decoding is designed to improve grounding by contrasting with-context and no-context distributions.</div>
-<div>This study adds decode-time control that reduces neutral regression while preserving helpful-context use in evaluated settings.</div>
+<div>CAD, AdaCAD, and CoCoA tilt decoding toward tokens boosted by context-conditioned generation.</div>
+<div>We proposed NWCAD to separate preservation from context utilization at decode time.</div>
 </div>
 </div>
 
-<div class="takeaway mt-4">
-Together, these studies move from social context, to informational grounding, to multilingual positional grounding, to decode-time control.
-</div>
+<div class="fine mt-4">Representative references include Weizenbaum; Nass and Moon; Grice; Giles et al.; Longpre et al.; Min et al.; Liu et al.; Shi et al.; Wang et al.; and Khandelwal et al.</div>
 
 ---
 class: section-slide
@@ -205,11 +227,11 @@ class: section-slide
 # Conversational adaptability and response efficiency in role-play interactions
 
 <div class="subtitle mt-6">
-Characterizing conversational adaptability in role-play interactions.
+Characterizing social-context adaptability in CRD.
 </div>
 
-<div class="fine mt-5">CRD contains 57 participants, 85 conversations, and 1,742 utterances across vanilla, boss, and classmate ChatGPT-3.5 interactions collected in March-April 2023.</div>
-<div class="fine mt-2">First-language labels describe participant diversity, not multilingual model behavior; user motives and model naturalness were annotated with substantial agreement.</div>
+<div class="fine mt-5">The CRD dataset contains 57 participants, 85 conversations, and 1,742 utterances across regular and role-play ChatGPT-3.5 interactions collected in March-April 2023.</div>
+<div class="fine mt-2">User motives and model naturalness were annotated with substantial agreement.</div>
 
 <div class="section-paper-ref">
 Paper: Tao et al., "ChatGPT Role-play Dataset: Analysis of User Motives and Model Naturalness," LREC-COLING 2024.
@@ -219,7 +241,7 @@ Paper: Tao et al., "ChatGPT Role-play Dataset: Analysis of User Motives and Mode
 
 <div class="kicker">Result 1</div>
 
-# Role-play changes conversation rhythm, but not the verbosity gap
+# Role-play changes conversation rhythm, while the verbosity gap remains
 
 <table class="table-lite mt-5">
 <thead>
@@ -227,15 +249,15 @@ Paper: Tao et al., "ChatGPT Role-play Dataset: Analysis of User Motives and Mode
 </thead>
 <tbody>
 <tr><td>Average conversation length, turns</td><td class="num"><strong>29.59</strong></td><td class="num">14.57</td><td class="num">17.11</td></tr>
-<tr><td>Average human utterance length</td><td class="num">12.18</td><td class="num"><strong>20.58</strong></td><td class="num">19.06</td></tr>
-<tr><td>Average ChatGPT utterance length</td><td class="num"><strong>77.66</strong></td><td class="num">35.78</td><td class="num">46.10</td></tr>
+<tr><td>Average human utterance length, words</td><td class="num">12.18</td><td class="num"><strong>20.58</strong></td><td class="num">19.06</td></tr>
+<tr><td>Average ChatGPT utterance length, words</td><td class="num"><strong>77.66</strong></td><td class="num">35.78</td><td class="num">46.10</td></tr>
 <tr><td>Human questions as percent of conversation</td><td class="num"><strong>26.34</strong></td><td class="num">21.32</td><td class="num">21.29</td></tr>
 <tr><td>ChatGPT questions as percent of conversation</td><td class="num">14.69</td><td class="num">20.34</td><td class="num"><strong>32.57</strong></td></tr>
 </tbody>
 </table>
 
 <div class="takeaway mt-5">
-Users in role-play produce longer turns; ChatGPT changes too, but remains systematically more verbose than human turns.
+Users in role-play produce longer turns; ChatGPT changes too, while remaining systematically more verbose than human turns.
 </div>
 
 ---
@@ -259,11 +281,11 @@ Role cues suppress "as an AI" behavior and increase naturalness; verbosity and o
 
 <div class="kicker">Study 1 Takeaway</div>
 
-# Social role cues shift behavior but do not eliminate generic assistant defaults
+# CRD shows that social context changes LLM behavior unevenly
 
 <div class="grid-3 mt-8">
-<div class="tile blue"><h3>Behavior changes</h3><p>Role-play changes both user behavior and model behavior.</p></div>
-<div class="tile amber"><h3>Adaptation is incomplete</h3><p>Verbosity, over-helpfulness, and partial misreading of user intent persist.</p></div>
+<div class="tile blue"><h3>We introduced CRD</h3><p>A human-AI role-play dataset with utterance-level user motive and model naturalness labels.</p></div>
+<div class="tile amber"><h3>Social adaptation has limits</h3><p>Role cues improve naturalness while verbosity, over-helpfulness, and partial misreading of user intent persist.</p></div>
 <div class="tile green"><h3>From roles to evidence</h3><p>If role cues only partially govern behavior, the next question is whether supplied evidence governs factual content.</p></div>
 </div>
 
@@ -289,27 +311,31 @@ Paper: Tao et al., "When Context Leads but Parametric Memory Follows in Large La
 
 # Contextual and parametric knowledge are labels over atomic response content
 
-<div class="grid-2 mt-8">
+<div class="atom-definition mt-5">
+<div class="atom-label">Atomic response content</div>
+<div class="atom-equation">model response &rarr; atom<sub>1</sub>, atom<sub>2</sub>, ... atom<sub>n</sub></div>
+<div class="atom-desc">Each atom is one factual proposition extracted from the response; each atom is labeled by entailment against the supplied context.</div>
+</div>
+
+<div class="grid-2 mt-5">
 <div class="tile green">
 <h3>Contextual knowledge (CK)</h3>
 <p>Atomic response content entailed by the supplied context.</p>
 </div>
 <div class="tile amber">
 <h3>Parametric knowledge (PK)</h3>
-<p>Atomic response content not entailed by the supplied context; factuality is checked separately.</p>
+<p>Atomic response content unsupported by the supplied context; factuality is checked separately.</p>
 </div>
 </div>
 
 <div class="grid-2 evidence-strip mt-5">
-<div class="tile green"><h3>Test item</h3><p>Topic, k atomic context sentences, open-ended question, and atomized model response.</p></div>
-<div class="tile blue"><h3>Knowledge-consistent setting</h3><p>Older Wikipedia contexts test grounding without deliberately contradicting model prior knowledge.</p></div>
+<div class="tile green"><h3>Test item</h3><p>Topic, a chosen number of atomic context sentences, open-ended question, and atomized model response.</p></div>
+<div class="tile blue"><h3>Knowledge-consistent setting</h3><p>Older Wikipedia contexts test grounding while staying broadly compatible with model prior knowledge.</p></div>
 </div>
 
 <div class="takeaway mt-5">
 The evaluation asks which generated claims are supported by the supplied context and which generated claims go beyond it.
 </div>
-
-<div class="fine mt-4">Operational caveat: CK/PK labels are entailment-threshold labels; PK means not entailed by the supplied context, not direct observation of an internal memory source.</div>
 
 ---
 
@@ -326,7 +352,7 @@ The evaluation asks which generated claims are supported by the supplied context
 
 <div class="grid-3 evidence-strip mt-5">
 <div class="tile blue" v-click><h3>Construction</h3><p>High-quality Wikipedia articles are decomposed into atomic sentences; context sizes grow from 2 to 50 sentences.</p></div>
-<div class="tile green" v-click><h3>Scoring</h3><p>Model responses are atomized and compared against atomic contexts with INFUSE at threshold 0.5.</p></div>
+<div class="tile green" v-click><h3>Scoring</h3><p>Model responses are atomized and compared against atomic contexts with the INFUSE entailment scorer at threshold 0.5.</p></div>
 <div class="tile amber" v-click><h3>Models</h3><p>GPT-4o, Claude 3, Llama 3, Mixtral, Mistral, and Phi-3.</p></div>
 </div>
 
@@ -394,13 +420,13 @@ The evaluation asks which generated claims are supported by the supplied context
 <div class="tile green"><h3>CK/PK similarity</h3><p>Rises to around 0.6, suggesting related rather than unrelated parametric content.</p></div>
 </div>
 
-<div class="fine mt-4">SBERT similarity supports topical relatedness, not usefulness or factual support.</div>
+<div class="fine mt-4">SBERT sentence-embedding similarity supports topical relatedness, not usefulness or factual support.</div>
 
 ---
 
 <div class="kicker">Faithfulness</div>
 
-# FActScore improves for PK-classified content as context increases
+# FActScore factuality evaluation improves for PK-classified content as context increases
 
 <div class="grid-2 wide-left mt-5">
 <div class="media-rail"><img src="/assets/factscore.png" class="media tall"></div>
@@ -408,7 +434,7 @@ The evaluation asks which generated claims are supported by the supplied context
 <div class="claim small">PK factuality scores improve.</div>
 <p class="mt-4">Residual parametric knowledge remains at larger context sizes.</p>
 <div class="takeaway mt-6">
-FActScore checks factuality separately from CK/PK grounding; supplied evidence changes model outputs in the expected direction, but not deterministically.
+FActScore factuality evaluation checks factuality separately from CK/PK grounding; supplied evidence changes model outputs in the expected direction, but not deterministically.
 </div>
 </div>
 </div>
@@ -461,7 +487,7 @@ Paper: Tao et al., "Lost-in-the-Later: Framework for Quantifying Contextual Grou
 <div class="tile amber"><h3>Measure recall position</h3><p>Entailed response atoms are traced back to context segments to estimate early, middle, and later evidence use.</p></div>
 </div>
 
-<div class="fine mt-3">Scale: 6 models, 3 languages, 10,800 question-response pairs, and calibrated entailment threshold 0.7. CoPE reports contextual knowledge score and context recall distribution as behavioral estimates of grounding.</div>
+<div class="fine mt-3">MultiWikiAtomic extends WikiAtomic to English, Spanish, and Danish. Scale: 6 models, 10,800 question-response pairs, calibrated entailment threshold 0.7. CoPE reports contextual knowledge score and context recall distribution.</div>
 
 ---
 
@@ -566,7 +592,7 @@ Most models reach CK scores around 70-75 in English and Spanish, while Danish ha
 
 # In the 50-context Llama 3.2 90B setting, CK Prompt gives the highest CK
 
-<div class="fine mt-3">LLaMA 3.2 90B, 50-context setting.</div>
+<div class="fine mt-3">LLaMA 3.2 90B, 50-context setting. CK Prompt explicitly asks for context-grounded answers; CoT refers to chain-of-thought prompting.</div>
 
 <table class="table-lite mt-5">
 <thead><tr><th>Prompt</th><th class="num">English</th><th class="num">Spanish</th><th class="num">Danish</th></tr></thead>
@@ -609,7 +635,7 @@ class: section-slide
 # No-Worse Context-Aware Decoding
 
 <div class="subtitle mt-6">
-NWCAD treats context use as a routing problem: reduce context-induced regressions when added context is neutral or distracting, yet still use context when it is genuinely corrective.
+NWCAD treats context use as a routing problem: preserve already-correct answers when added context is neutral or distracting, yet still use context when it is genuinely corrective.
 </div>
 
 <div class="section-paper-ref">
@@ -635,13 +661,36 @@ Paper: Tao and Agrawal, "No-Worse Context-Aware Decoding: Preventing Neutral Reg
 </div>
 </div>
 <div class="answer-compare mt-3">
-<div><span>With-context / CAD-style decoders</span><strong>1978</strong></div>
+<div><span>With-context / context-aware decoders</span><strong>1978</strong></div>
 <div><span>NWCAD</span><strong>January 1, 1979</strong></div>
 </div>
 </div>
 
 <div class="takeaway red mt-4">
 The added context creates type-matched pressure, but it does not entail the gold answer. Changing the already-correct answer is neutral regression.
+</div>
+
+---
+
+<div class="kicker">Controlled Benchmark</div>
+
+# The benchmark separates two objectives
+
+<div class="grid-3 mt-7">
+<div class="tile blue"><h3>Restated</h3><p>Neutral context restates or aligns with the answer.</p></div>
+<div class="tile red"><h3>Distractor</h3><p>Incorrect but non-entailing pressure.</p></div>
+<div class="tile green"><h3>Helpful</h3><p>Context provides evidence that the baseline lacks.</p></div>
+</div>
+
+<div class="fine mt-5">Restated and distractor examples are baseline-correct neutral cases; helpful examples are baseline-wrong but context-correct cases.</div>
+<div class="fine mt-2">The helpful slice isolates context utilization; it is not intended to estimate natural prevalence.</div>
+
+<div class="flow mt-8">
+<div class="step" v-click>Preserve neutral</div>
+<div class="arrow" v-after>+</div>
+<div class="step" v-after>Use helpful</div>
+<div class="arrow" v-after>-></div>
+<div class="step" v-after>No-worse decoding</div>
 </div>
 
 ---
@@ -671,7 +720,7 @@ The added context creates type-matched pressure, but it does not entail the gold
 <div class="trade-zone use">Use genuinely corrective context</div>
 <div class="trade-point noctx">No-context</div>
 <div class="trade-point ctx">With-context</div>
-<div class="trade-point cad">CAD-style shift</div>
+<div class="trade-point cad">Context-shifted decoder</div>
 <div class="trade-point nwcad">NWCAD</div>
 </div>
 
@@ -684,29 +733,6 @@ The added context creates type-matched pressure, but it does not entail the gold
 <h3>Context utilization</h3>
 <p>Questions where the context can correct the answer.</p>
 </div>
-</div>
-
----
-
-<div class="kicker">Controlled Benchmark</div>
-
-# The benchmark separates two objectives
-
-<div class="grid-3 mt-7">
-<div class="tile blue"><h3>Restated</h3><p>Neutral context restates or aligns with the answer.</p></div>
-<div class="tile red"><h3>Distractor</h3><p>Incorrect but non-entailing pressure.</p></div>
-<div class="tile green"><h3>Helpful</h3><p>Context provides evidence that the baseline lacks.</p></div>
-</div>
-
-<div class="fine mt-5">Restated and distractor examples are baseline-correct neutral cases; helpful examples are baseline-wrong but context-correct cases.</div>
-<div class="fine mt-2">The helpful slice isolates context utilization; it is not intended to estimate natural prevalence.</div>
-
-<div class="flow mt-8">
-<div class="step" v-click>Preserve neutral</div>
-<div class="arrow" v-after>+</div>
-<div class="step" v-after>Use helpful</div>
-<div class="arrow" v-after>-></div>
-<div class="step" v-after>No-worse decoding</div>
 </div>
 
 ---
@@ -752,7 +778,7 @@ With-context stream:<br>
 <div>
 <div class="tile blue"><h3>Preserve</h3><p>Copy no-context logits on low-pressure confident steps.</p></div>
 <div class="tile green mt-4"><h3>Use context</h3><p>Use context logits when the context stream is confident.</p></div>
-<div class="tile amber mt-4"><h3>Fallback</h3><p>Use the plug-in CAD-style decoder only when neither gate is decisive.</p></div>
+<div class="tile amber mt-4"><h3>Fallback</h3><p>Use a plug-in contrastive decoder only when neither gate is decisive.</p></div>
 </div>
 </div>
 
@@ -777,7 +803,7 @@ NWCAD treats context-aware decoding as regime selection rather than continuous l
 </div>
 <div class="tile amber">
 <h3>Fallback</h3>
-<p>Otherwise, fall back to the plug-in CAD-style decoder when Stage 1 does not apply and the context stream is not sufficiently confident.</p>
+<p>Otherwise, fall back to a plug-in contrastive decoder when Stage 1 does not apply and the context stream is not sufficiently confident.</p>
 </div>
 </div>
 
@@ -843,7 +869,7 @@ When the context is non-informative and the no-context answer is already correct
 <img src="/assets/nwcad-component-ablation.png" class="media fit-wide">
 </div>
 <div>
-<div class="tile blue"><h3>Stage 1 only</h3><p>NWCAD<sub>BC</sub> protects baseline-correct neutral cases.</p></div>
+<div class="tile blue"><h3>Stage 1 only</h3><p>The baseline-correct preservation stage protects baseline-correct neutral cases.</p></div>
 <div class="tile green mt-4"><h3>Full method</h3><p>Stage 2 adds gains when the decoder should use the context rather than ignore it.</p></div>
 <div class="tile amber mt-4"><h3>Takeaway</h3><p>Adding Stage 2 improves performance across the evaluation suite by 5.2% on average.</p></div>
 </div>
@@ -860,9 +886,9 @@ When the context is non-informative and the no-context answer is already correct
 <img src="/assets/nwcad-adapter.png" class="media fit-wide">
 </div>
 <div>
-<div class="tile red"><h3>Largest gains</h3><p>Wrapping CAD and CoCoA gives large improvements because these decoders are more exposed to neutral regression under distractor pressure.</p></div>
-<div class="tile green mt-4"><h3>Fallback is plug-in</h3><p>NWCAD can use CAD, AdaCAD, or CoCoA as the Stage-2 fallback.</p></div>
-<div class="tile blue mt-4"><h3>Interpretation</h3><p>The result supports the adapter view: regime selection improves existing context-aware decoding methods.</p></div>
+<div class="tile red"><h3>Largest gains</h3><p>Wrapping existing contrastive decoders such as CAD and CoCoA gives large improvements because they are more exposed to neutral regression under distractor pressure.</p></div>
+<div class="tile green mt-4"><h3>Fallback is plug-in</h3><p>NWCAD can use existing decoders such as CAD, AdaCAD, or CoCoA as the Stage-2 fallback.</p></div>
+<div class="tile blue mt-4"><h3>Interpretation</h3><p>The result supports the adapter view: regime selection improves existing two-stream context-aware decoding methods.</p></div>
 </div>
 </div>
 
@@ -994,6 +1020,36 @@ The next step is to evaluate whether context governs the construction and use of
 
 ---
 
+<div class="kicker">Acknowledgements</div>
+
+# Thank you
+
+<div class="grid-2 mt-7">
+<div class="tile blue">
+<h3>Committee</h3>
+<p>Dr. Ameeta Agrawal, Dr. Suresh Singh, Dr. Tetyana Sydorenko, and Dr. Wu-chi Feng.</p>
+</div>
+<div class="tile green">
+<h3>Collaborators</h3>
+<p>Adam Hiatt, Rahul Seetharaman, Erik Haake, Antonie J. Jetter, Judit Dombi, Jung In Lee, Tiernan Mines, Rhitabrat Pokharel, and other coauthors across this work.</p>
+</div>
+</div>
+
+<div class="grid-2 mt-5">
+<div class="tile amber">
+<h3>Research community</h3>
+<p>PortNLP, Portland State University, annotators, study participants, and reviewers who shaped the studies.</p>
+</div>
+<div class="tile red">
+<h3>Family and friends</h3>
+<p>For support throughout the PhD and through the long path from drafts to dissertation.</p>
+</div>
+</div>
+
+<div class="fine mt-6">Title icons made by Freepik from Flaticon.</div>
+
+---
+
 <div class="thanks">
 <div class="kicker">Closing</div>
 
@@ -1002,10 +1058,6 @@ This dissertation argues for moving context from an input that merely influences
 </div>
 
 <div class="byline mt-12">Thank you.</div>
-
-<div class="asset-credit">
-Title icons made by <a href="https://www.freepik.com">Freepik</a> from <a href="https://www.flaticon.com/">Flaticon</a>.
-</div>
 </div>
 
 ---
