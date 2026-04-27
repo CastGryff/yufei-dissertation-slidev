@@ -331,6 +331,29 @@ Paper: Tao et al., "When Context Leads but Parametric Memory Follows in Large La
 
 ---
 
+<div class="kicker">Operational Definitions</div>
+
+# Contextual and parametric knowledge are labels over atomic response content
+
+<div class="grid-2 mt-8">
+<div class="tile green">
+<h3>Contextual knowledge (CK)</h3>
+<p>Atomic response content entailed by the supplied context.</p>
+</div>
+<div class="tile amber">
+<h3>Parametric knowledge (PK)</h3>
+<p>Atomic response content not entailed by the supplied context; factuality is checked separately.</p>
+</div>
+</div>
+
+<div class="takeaway mt-8">
+The evaluation asks which generated claims are supported by the supplied context and which generated claims go beyond it.
+</div>
+
+<div class="fine mt-4">Operational caveat: CK/PK labels are entailment-threshold labels; PK means not entailed by the supplied context, not direct observation of an internal memory source.</div>
+
+---
+
 <div class="kicker">Study 2 Framing</div>
 
 # The task is open-ended question answering in a knowledge-consistent setting
@@ -373,27 +396,15 @@ Paper: Tao et al., "When Context Leads but Parametric Memory Follows in Large La
 
 ---
 
-<div class="kicker">Example</div>
-
-# Atomic responses are mapped to contextual and parametric knowledge
-
-<div class="media-rail mt-4">
-<img src="/assets/ckpk-real-example.png" class="media tall">
-</div>
-
-<div class="caption">An example of context, question, model response, and the list of atomic responses mapped to contextual knowledge and parametric knowledge.</div>
-
----
-
 <div class="kicker">Evaluation Setup</div>
 
 # The evaluation compares atomic contexts with atomic responses
 
 <div class="grid-2 mt-6">
 <div>
-<div class="tile green"><h3>CK/PK detection</h3><p>Using the atomic contexts as a reference, atomic responses are categorized as contextual or parametric knowledge with INFUSE.</p></div>
+<div class="tile blue"><h3>Response atomization</h3><p>Model responses are converted into atomic sentences using the same atomization process as the input context.</p></div>
+<div class="tile green mt-4"><h3>CK/PK detection</h3><p>Using the atomic contexts as a reference, atomic responses are categorized as contextual or parametric knowledge with INFUSE.</p></div>
 <div class="tile amber mt-4"><h3>Threshold calibration</h3><p>The threshold is set at 0.5; three annotators reviewed a subset of ambiguously scored sentences.</p></div>
-<div class="tile red mt-4"><h3>Hallucination detection</h3><p>Sentences classified as parametric knowledge are further assessed using FActScore.</p></div>
 </div>
 <div class="tile blue">
 <h3>Models</h3>
@@ -405,32 +416,20 @@ Paper: Tao et al., "When Context Leads but Parametric Memory Follows in Large La
 <li>Mistral 7B</li>
 <li>Phi-3</li>
 </ul>
-<p class="fine mt-4">An SBERT sanity check on five topics suggests high consistency between k=0 responses and the longest input contexts.</p>
 </div>
 </div>
-
-<div class="fine mt-4">Operational caveat: CK/PK labels are entailment-threshold labels; PK means not entailed by the supplied context, not direct observation of an internal memory source.</div>
 
 ---
 
-<div class="kicker">Operational Definitions</div>
+<div class="kicker">Example</div>
 
-# Two sources inside one response
+# Atomic responses are mapped to contextual and parametric knowledge
 
-<div class="grid-2 mt-8">
-<div class="tile green">
-<h3>Contextual knowledge (CK)</h3>
-<p>Atomic response content entailed by the supplied context.</p>
-</div>
-<div class="tile amber">
-<h3>Parametric knowledge (PK)</h3>
-<p>Atomic response content not entailed by the supplied context; factuality is checked separately.</p>
-</div>
+<div class="media-rail mt-4">
+<img src="/assets/ckpk-real-example.png" class="media tall">
 </div>
 
-<div class="takeaway mt-8">
-LLMs do not simply reproduce the provided evidence: they mix grounded content with non-entailed response content, fail to use all available context, and reduce hallucination only gradually as contextual evidence increases.
-</div>
+<div class="caption">An example of context, question, model response, and the list of atomic responses mapped to contextual knowledge and parametric knowledge.</div>
 
 ---
 
@@ -459,7 +458,7 @@ LLMs do not simply reproduce the provided evidence: they mix grounded content wi
 <div>
 <div class="tile green"><h3>Small k</h3><p>Models use different parts of context more evenly.</p></div>
 <div class="tile amber mt-4"><h3>Larger k</h3><p>The first quartile receives increasing emphasis.</p></div>
-<div class="tile red mt-4"><h3>Failure shape</h3><p>The model struggles more with the bottom half than with the middle alone.</p></div>
+<div class="tile red mt-4"><h3>Failure shape</h3><p>Later evidence is recalled less reliably than earlier evidence, especially as k grows.</p></div>
 </div>
 <div class="media-rail"><img src="/assets/context-position-gpt4o.png" class="media tall"></div>
 </div>
@@ -537,15 +536,19 @@ Paper: Tao et al., "Lost-in-the-Later: Framework for Quantifying Contextual Grou
 
 <div class="kicker">MultiWikiAtomic + CoPE</div>
 
-# Measuring grounding and recall together
+# CoPE measures whether later evidence is grounded across languages
 
-<div class="media-rail mt-4">
-<img src="/assets/lostlater-pipeline.png" class="media tall">
+<div class="media-rail pipeline-wide mt-4">
+<img src="/assets/lostlater-pipeline.png" class="media cope-pipeline">
 </div>
 
-<div class="caption">CoPE computes contextual knowledge score and context recall distribution as a calibrated behavioral estimate of grounding, not a mechanistic measure.</div>
+<div class="grid-3 evidence-strip mt-3">
+<div class="tile blue"><h3>Atomize</h3><p>Input context and model responses are broken into atomic factual propositions.</p></div>
+<div class="tile green"><h3>Label CK vs. PK</h3><p>Each response atom is checked against the supplied context with multilingual NLI.</p></div>
+<div class="tile amber"><h3>Measure recall position</h3><p>Entailed response atoms are traced back to context segments to estimate early, middle, and later evidence use.</p></div>
+</div>
 
-<div class="fine mt-3">Scoring calibration: Study 2 uses English INFUSE scoring at threshold 0.5; Study 3 uses multilingual NLI scoring at a calibrated 0.7 entailment threshold, checked with human judgments, synthetic examples, and threshold robustness analysis.</div>
+<div class="fine mt-3">CoPE reports a contextual knowledge score and a context recall distribution as calibrated behavioral estimates of grounding, not mechanistic measures.</div>
 
 ---
 
@@ -601,12 +604,12 @@ Most models reach CK scores around 70-75 in English and Spanish, while Danish ha
 
 <div class="kicker">Randomization Check</div>
 
-# Shuffling does not remove the later-context gap
+# Later evidence is still underused after sentence-order randomization
 
 <div class="grid-2 mt-5">
 <div>
 <table class="table-lite">
-<thead><tr><th>Language</th><th class="num">Absolute Q1-over-Q4 recall gap at 50 contexts</th></tr></thead>
+<thead><tr><th>Language</th><th class="num">Absolute Q1-over-Q4 recall gap at context length 50</th></tr></thead>
 <tbody>
 <tr><td>English</td><td class="num">14.63-26.11 pp</td></tr>
 <tr><td>Spanish</td><td class="num">12.63-25.81 pp</td></tr>
@@ -615,8 +618,8 @@ Most models reach CK scores around 70-75 in English and Spanish, while Danish ha
 </table>
 </div>
 <div>
-<div class="tile amber"><h3>Randomized trials</h3><p>450 representative questions across three languages and six models produced 8,100 randomized trials.</p></div>
-<div class="tile red mt-4"><h3>Interpretation</h3><p>The later-context gap does not disappear when order is randomized.</p></div>
+<div class="tile red"><h3>Interpretation</h3><p>This is not just because Wikipedia articles put easier facts first; the later-context gap remains after order is randomized.</p></div>
+<div class="tile amber mt-4"><h3>Randomized trials</h3><p>450 representative questions across three languages and six models produced 8,100 randomized trials.</p></div>
 </div>
 </div>
 
@@ -639,27 +642,27 @@ Most models reach CK scores around 70-75 in English and Spanish, while Danish ha
 
 <div class="kicker">Contradiction</div>
 
-# Grounding weakens when context conflicts with likely model/world knowledge
+# Counterfactual contexts separate grounding from truth
 
 <div class="grid-2 wide-left mt-5">
 <div>
 <table class="table-lite compact">
-<thead><tr><th>Model</th><th class="num">Factual</th><th class="num">CF</th><th class="num">TF</th><th class="num">FF</th></tr></thead>
+<thead><tr><th>Model</th><th class="num">Factual</th><th class="num">All CF</th><th class="num">True first</th><th class="num">False first</th></tr></thead>
 <tbody>
-<tr><td>GPT-4o</td><td class="num"><strong>72.11</strong></td><td class="num">69.40</td><td class="num">71.22</td><td class="num">68.51</td></tr>
-<tr><td>Gemini 1.5 Pro</td><td class="num"><strong>76.29</strong></td><td class="num">64.97</td><td class="num">71.97</td><td class="num">67.28</td></tr>
-<tr><td>Llama 3.2 90B</td><td class="num"><strong>76.32</strong></td><td class="num">66.91</td><td class="num">74.44</td><td class="num">64.40</td></tr>
-<tr><td>Llama 3.2 3B</td><td class="num"><strong>73.13</strong></td><td class="num">68.27</td><td class="num">72.97</td><td class="num">68.48</td></tr>
-<tr><td>GPT-o3</td><td class="num">49.58</td><td class="num">46.34</td><td class="num"><strong>55.75</strong></td><td class="num">54.37</td></tr>
-<tr><td>Qwen 3 235B</td><td class="num">55.30</td><td class="num">52.85</td><td class="num"><strong>58.02</strong></td><td class="num">55.62</td></tr>
+<tr><td>GPT-4o</td><td class="num">72.11</td><td class="num">69.40</td><td class="num">71.22</td><td class="num">68.51</td></tr>
+<tr><td>Gemini 1.5 Pro</td><td class="num">76.29</td><td class="num">64.97</td><td class="num">71.97</td><td class="num">67.28</td></tr>
+<tr><td>Llama 3.2 90B</td><td class="num">76.32</td><td class="num">66.91</td><td class="num">74.44</td><td class="num">64.40</td></tr>
+<tr><td>Llama 3.2 3B</td><td class="num">73.13</td><td class="num">68.27</td><td class="num">72.97</td><td class="num">68.48</td></tr>
+<tr><td>GPT-o3</td><td class="num">49.58</td><td class="num">46.34</td><td class="num">55.75</td><td class="num">54.37</td></tr>
+<tr><td>Qwen 3 235B</td><td class="num">55.30</td><td class="num">52.85</td><td class="num">58.02</td><td class="num">55.62</td></tr>
 </tbody>
 </table>
 <div class="caption">CK scores in English under factual, counterfactual, true-first, and false-first contexts.</div>
 </div>
 <div>
-<div class="tile red"><h3>Counterfactual context</h3><p>All models experience a CK drop under fully counterfactual contexts, but CK does not drop to zero.</p></div>
-<div class="tile amber mt-4"><h3>Mixed order</h3><p>In this English contradiction setting, true-first usually gives higher CK than false-first.</p></div>
-<div class="tile green mt-4"><h3>Grounding vs. truth</h3><p>CK reflects grounding to the input, not whether the input is true in the world.</p></div>
+<div class="tile red"><h3>All counterfactual</h3><p>All 20 context sentences are made non-factual by swapping named entities with plausible alternatives.</p></div>
+<div class="tile amber mt-4"><h3>Mixed order</h3><p>True-first and false-first settings mix factual and counterfactual evidence to test order sensitivity.</p></div>
+<div class="tile green mt-4"><h3>Interpretation</h3><p>All-counterfactual contexts lower CK relative to factual contexts; mixed settings expose order sensitivity. CK measures grounding to the input, not truth in the world.</p></div>
 </div>
 </div>
 
@@ -723,21 +726,28 @@ Paper: Tao and Agrawal, "No-Worse Context-Aware Decoding: Preventing Neutral Reg
 
 <div class="kicker">Neutral Regression</div>
 
-# Context can help, but it can also cause neutral regression
+# Neutral regression: weak context overwrites a correct answer
 
-<div class="grid-2 mt-8">
-<div class="tile green">
-<h3>Helpful context</h3>
-<p>Provides evidence that corrects a wrong no-context answer.</p>
+<div class="neutral-example mt-5">
+<div class="example-question">Q: When did the U.S. normalize relations with China?</div>
+<div class="grid-2 mt-3">
+<div class="tile blue">
+<h3>Gold / no-context answer</h3>
+<p>January 1, 1979</p>
 </div>
-<div class="tile red">
-<h3>Neutral or distracting context</h3>
-<p>Does not license changing an already-correct no-context answer.</p>
+<div class="tile amber">
+<h3>Distractor context excerpt</h3>
+<p>Although the process culminated in a major announcement in 1978, it reflected decades of evolving U.S.-China relations.</p>
+</div>
+</div>
+<div class="answer-compare mt-3">
+<div><span>With-context / CAD-style decoders</span><strong>1978</strong></div>
+<div><span>NWCAD</span><strong>January 1, 1979</strong></div>
 </div>
 </div>
 
-<div class="takeaway red mt-8">
-The goal is to reduce do-no-harm failures on questions that are already answered correctly without context.
+<div class="takeaway red mt-4">
+The added context creates type-matched pressure, but it does not entail the gold answer. Changing the already-correct answer is neutral regression.
 </div>
 
 ---
@@ -749,7 +759,7 @@ The goal is to reduce do-no-harm failures on questions that are already answered
 <div class="grid-2 wide-right mt-5">
 <div>
 <div class="tile red"><h3>Controlled filter</h3><p>Baseline-correct filtering makes no-context accuracy 100% by construction.</p></div>
-<div class="tile amber mt-4"><h3>Regression signal</h3><p>In this evaluation slice, any with-context drop is a context-induced regression.</p></div>
+<div class="tile amber mt-4"><h3>Regression signal</h3><p>Within baseline-correct neutral cases, a with-context drop is a context-induced regression.</p></div>
 </div>
 <div class="media-rail"><img src="/assets/nwcad-neutral-regression.png" class="media tall"></div>
 </div>
