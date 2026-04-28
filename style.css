@@ -1749,10 +1749,10 @@
   top: auto;
   bottom: 0.95rem;
   z-index: 26;
-  height: 3px;
+  height: 1px;
   overflow: visible;
   border-radius: 999px;
-  background: rgba(31,95,147,0.12);
+  background: rgba(31,95,147,0.1);
   pointer-events: none;
 }
 
@@ -1762,14 +1762,14 @@
   top: 0;
   bottom: 0;
   border-radius: 999px;
-  background: rgba(31,95,147,0.62);
+  background: rgba(31,95,147,0.56);
 }
 
 .deck-progress-simple-dot {
   position: absolute;
   top: 50%;
-  width: 7px;
-  height: 7px;
+  width: 3.5px;
+  height: 3.5px;
   transform: translate(-50%, -50%);
   border: 1px solid rgba(31,95,147,0.45);
   border-radius: 999px;
