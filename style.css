@@ -1810,6 +1810,971 @@
   border-radius: 8px;
 }
 
+.slidev-layout .katex-display {
+  margin: 0.2rem 0;
+  padding: 0.72rem 0.9rem;
+  border: 1px solid var(--hair);
+  border-radius: 8px;
+  background: var(--surface-strong);
+}
+
+.slidev-layout .katex-display > .katex {
+  color: var(--ink);
+  font-size: 1.08rem;
+}
+
+.cad-style-slide .katex-display {
+  margin: 0.1rem 0 0;
+  padding: 0.34rem 0.62rem;
+}
+
+.cad-style-slide .katex-display > .katex {
+  font-size: 0.82rem;
+}
+
+.cad-process {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.9fr 1fr;
+  gap: 0.72rem;
+  align-items: stretch;
+}
+
+.cad-node {
+  position: relative;
+  min-height: 6.4rem;
+  border: 1px solid var(--hair);
+  border-top: 4px solid var(--blue);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.94);
+  padding: 0.62rem 0.72rem;
+  box-shadow: 0 12px 26px rgba(47,64,82,0.06);
+}
+
+.cad-node::after {
+  content: "";
+  position: absolute;
+  right: -0.54rem;
+  top: 50%;
+  width: 0.34rem;
+  height: 0.34rem;
+  border-top: 2px solid rgba(96,106,120,0.66);
+  border-right: 2px solid rgba(96,106,120,0.66);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.cad-node.output::after {
+  display: none;
+}
+
+.cad-node.context {
+  border-top-color: var(--green);
+}
+
+.cad-node.operator {
+  border-top-color: var(--amber);
+  background: rgba(251,247,242,0.94);
+}
+
+.cad-node.output {
+  border-top-color: var(--red);
+}
+
+.cad-node-title {
+  color: var(--ink);
+  font-size: 0.86rem;
+  line-height: 1.08;
+  font-weight: 860;
+}
+
+.cad-node-sub {
+  margin-top: 0.2rem;
+  color: var(--muted);
+  font-size: 0.58rem;
+  line-height: 1.12;
+  font-weight: 760;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cad-bars {
+  margin-top: 0.62rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.34rem;
+}
+
+.cad-bar-row {
+  display: grid;
+  grid-template-columns: 2.35rem 1fr;
+  gap: 0.38rem;
+  align-items: center;
+  color: var(--ink);
+  font-size: 0.66rem;
+  font-weight: 820;
+}
+
+.cad-bar-row i {
+  display: block;
+  width: var(--w);
+  height: 0.38rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(15,118,110,0.78), rgba(31,95,147,0.52));
+}
+
+.cad-node.context .cad-bar-row i {
+  background: linear-gradient(90deg, rgba(15,118,110,0.82), rgba(182,98,50,0.52));
+}
+
+.cad-bar-row.muted {
+  color: rgba(96,106,120,0.78);
+}
+
+.cad-bar-row.muted i {
+  opacity: 0.42;
+}
+
+.cad-delta {
+  margin-top: 0.7rem;
+  border-radius: 4px;
+  border: 1px solid rgba(182,98,50,0.28);
+  background: rgba(255,255,255,0.84);
+  padding: 0.5rem 0.52rem;
+  color: var(--ink);
+  font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.74rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.cad-token-result {
+  margin-top: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-radius: 4px;
+  background: var(--soft-red);
+  border: 1px solid rgba(168,64,86,0.18);
+  padding: 0.5rem 0.56rem;
+}
+
+.cad-token-result span {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 880;
+}
+
+.cad-token-result strong {
+  color: var(--red);
+  font-size: 0.58rem;
+  font-weight: 860;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.cad-formula-label {
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-weight: 820;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nwcad-gate-slide .katex-display {
+  margin: 0;
+  padding: 0.34rem 0.62rem;
+}
+
+.nwcad-gate-slide .katex-display > .katex {
+  font-size: 0.76rem;
+}
+
+.nwcad-route-diagram {
+  display: grid;
+  grid-template-columns: 0.88fr 0.92fr 1.25fr;
+  gap: 0.78rem;
+  align-items: stretch;
+}
+
+.nwcad-streams {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.58rem;
+}
+
+.nwcad-stream,
+.nwcad-gate-card,
+.nwcad-decision {
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.94);
+  box-shadow: 0 12px 26px rgba(47,64,82,0.06);
+}
+
+.nwcad-stream {
+  position: relative;
+  overflow: hidden;
+  border-top: 4px solid var(--blue);
+  padding: 0.62rem 4.1rem 0.62rem 0.72rem;
+}
+
+.nwcad-stream.context {
+  border-top-color: var(--green);
+}
+
+.nwcad-mini-label {
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-weight: 840;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nwcad-logit {
+  margin-top: 0.34rem;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.05;
+  font-weight: 860;
+}
+
+.nwcad-stream p {
+  margin: 0.32rem 0 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.12;
+}
+
+.nwcad-symbol {
+  position: absolute;
+  right: 0.66rem;
+  top: 0.58rem;
+  width: 2.65rem;
+  height: 2.65rem;
+  border: 1px solid rgba(31,95,147,0.22);
+  border-radius: 50%;
+  background: rgba(244,248,252,0.82);
+  box-shadow: inset 0 0 0 0.42rem rgba(255,255,255,0.62);
+}
+
+.nwcad-stream.context .nwcad-symbol {
+  border-color: rgba(15,118,110,0.22);
+  background: rgba(243,249,247,0.84);
+}
+
+.distribution-symbol i {
+  position: absolute;
+  left: 0.6rem;
+  height: 0.2rem;
+  border-radius: 999px;
+  background: var(--blue);
+}
+
+.distribution-symbol i:nth-child(1) {
+  top: 0.72rem;
+  width: 1.3rem;
+  opacity: 0.52;
+}
+
+.distribution-symbol i:nth-child(2) {
+  top: 1.18rem;
+  width: 1.66rem;
+  opacity: 0.84;
+}
+
+.distribution-symbol i:nth-child(3) {
+  top: 1.64rem;
+  width: 0.98rem;
+  opacity: 0.38;
+}
+
+.context-symbol::before {
+  content: "";
+  position: absolute;
+  left: 0.76rem;
+  top: 0.46rem;
+  width: 1.2rem;
+  height: 1.62rem;
+  border: 2px solid var(--green);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.74);
+}
+
+.context-symbol::after {
+  content: "";
+  position: absolute;
+  left: 1.64rem;
+  top: 0.48rem;
+  width: 0.36rem;
+  height: 0.36rem;
+  border-left: 2px solid var(--green);
+  border-bottom: 2px solid var(--green);
+  background: rgba(243,249,247,0.98);
+  transform: rotate(0deg);
+}
+
+.context-symbol i {
+  position: absolute;
+  left: 0.98rem;
+  width: 0.76rem;
+  height: 0.12rem;
+  border-radius: 999px;
+  background: rgba(15,118,110,0.62);
+  z-index: 1;
+}
+
+.context-symbol i:nth-child(1) {
+  top: 1rem;
+}
+
+.context-symbol i:nth-child(2) {
+  top: 1.28rem;
+}
+
+.context-symbol i:nth-child(3) {
+  top: 1.56rem;
+  width: 0.52rem;
+}
+
+.nwcad-gate-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.46rem;
+  border-top: 4px solid var(--amber);
+  background:
+    radial-gradient(circle at 50% 38%, rgba(182,98,50,0.11), transparent 52%),
+    rgba(255,255,255,0.94);
+  padding: 0.72rem;
+}
+
+.gate-orbit {
+  position: absolute;
+  left: 50%;
+  top: 0.62rem;
+  width: 6.3rem;
+  height: 6.3rem;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.gate-orbit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgba(182,98,50,0.38);
+  border-radius: 50%;
+  animation: nwcad-orbit 18s linear infinite;
+}
+
+.gate-orbit i {
+  position: absolute;
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 0 0.24rem rgba(182,98,50,0.10);
+}
+
+.gate-orbit i:nth-child(1) {
+  left: 50%;
+  top: -0.16rem;
+}
+
+.gate-orbit i:nth-child(2) {
+  right: 0.22rem;
+  top: 4.72rem;
+  background: var(--green);
+}
+
+.gate-orbit i:nth-child(3) {
+  left: 0.14rem;
+  top: 4.58rem;
+  background: var(--blue);
+}
+
+.nwcad-gate-card::before,
+.nwcad-gate-card::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 0.44rem;
+  height: 0.44rem;
+  border-top: 2px solid rgba(96,106,120,0.7);
+  border-right: 2px solid rgba(96,106,120,0.7);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.nwcad-gate-card::before {
+  left: -0.64rem;
+}
+
+.nwcad-gate-card::after {
+  right: -0.64rem;
+}
+
+.gate-core {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 880;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 14px 30px rgba(16,23,34,0.16);
+}
+
+.gate-core::after {
+  content: "";
+  position: absolute;
+  inset: -0.42rem;
+  border: 1px solid rgba(16,23,34,0.16);
+  border-radius: 50%;
+  animation: nwcad-pulse 2.8s ease-in-out infinite;
+}
+
+.gate-signal {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.45rem;
+  border-left: 4px solid var(--blue);
+  border-radius: 4px;
+  background: rgba(244,248,252,0.9);
+  padding: 0.38rem 0.48rem;
+}
+
+.gate-signal.green {
+  border-left-color: var(--green);
+  background: rgba(243,249,247,0.9);
+}
+
+.gate-signal span {
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.gate-signal strong {
+  color: var(--ink);
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.nwcad-decisions {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.48rem;
+}
+
+.nwcad-decision {
+  display: grid;
+  grid-template-columns: 2.3rem 1fr;
+  gap: 0.58rem;
+  align-items: center;
+  border-left: 5px solid var(--blue);
+  padding: 0.48rem 0.62rem;
+}
+
+.decision-symbol {
+  position: relative;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 1px solid rgba(31,95,147,0.22);
+  border-radius: 50%;
+  background: rgba(244,248,252,0.9);
+  box-shadow: inset 0 0 0 0.32rem rgba(255,255,255,0.68);
+}
+
+.nwcad-decision.use .decision-symbol {
+  border-color: rgba(15,118,110,0.24);
+  background: rgba(243,249,247,0.94);
+}
+
+.nwcad-decision.fallback .decision-symbol {
+  border-color: rgba(182,98,50,0.26);
+  background: rgba(251,247,242,0.94);
+}
+
+.preserve-symbol::before {
+  content: "";
+  position: absolute;
+  left: 0.57rem;
+  top: 0.93rem;
+  width: 0.88rem;
+  height: 0.62rem;
+  border: 2px solid var(--blue);
+  border-radius: 4px;
+}
+
+.preserve-symbol::after {
+  content: "";
+  position: absolute;
+  left: 0.69rem;
+  top: 0.48rem;
+  width: 0.62rem;
+  height: 0.62rem;
+  border: 2px solid var(--blue);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+}
+
+.use-symbol::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 0.82rem;
+  width: 1.08rem;
+  height: 0.56rem;
+  border-left: 3px solid var(--green);
+  border-bottom: 3px solid var(--green);
+  transform: rotate(-45deg);
+}
+
+.use-symbol::after {
+  content: "";
+  position: absolute;
+  right: 0.44rem;
+  top: 0.42rem;
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 0.18rem rgba(15,118,110,0.12);
+}
+
+.fallback-symbol::before {
+  content: "";
+  position: absolute;
+  left: 0.48rem;
+  top: 0.48rem;
+  width: 1.06rem;
+  height: 1.06rem;
+  border: 2px solid var(--amber);
+  border-right-color: transparent;
+  border-radius: 50%;
+}
+
+.fallback-symbol::after {
+  content: "";
+  position: absolute;
+  left: 1.27rem;
+  top: 0.43rem;
+  width: 0.34rem;
+  height: 0.34rem;
+  border-top: 2px solid var(--amber);
+  border-right: 2px solid var(--amber);
+  transform: rotate(16deg);
+}
+
+.nwcad-decision.use {
+  border-left-color: var(--green);
+}
+
+.nwcad-decision.fallback {
+  border-left-color: var(--amber);
+}
+
+.nwcad-decision h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.84rem;
+  line-height: 1.05;
+  font-weight: 860;
+}
+
+.nwcad-decision p {
+  margin: 0.22rem 0 0;
+  color: var(--muted);
+  font-size: 0.62rem;
+  line-height: 1.12;
+}
+
+.nwcad-decision strong {
+  display: inline-block;
+  margin-top: 0.34rem;
+  color: var(--ink);
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.nwcad-reading-band {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.56rem;
+}
+
+.nwcad-reading-card {
+  position: relative;
+  border: 1px solid var(--hair);
+  border-left: 4px solid var(--blue);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.94);
+  padding: 0.5rem 0.62rem 0.54rem;
+  box-shadow: 0 10px 22px rgba(47,64,82,0.05);
+}
+
+.nwcad-reading-card::after {
+  content: "";
+  position: absolute;
+  right: -0.46rem;
+  top: 50%;
+  width: 0.28rem;
+  height: 0.28rem;
+  border-top: 2px solid rgba(96,106,120,0.45);
+  border-right: 2px solid rgba(96,106,120,0.45);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.nwcad-reading-card:last-child::after {
+  display: none;
+}
+
+.nwcad-reading-card.green {
+  border-left-color: var(--green);
+}
+
+.nwcad-reading-card.amber {
+  border-left-color: var(--amber);
+}
+
+.nwcad-reading-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.52rem;
+  font-weight: 820;
+  letter-spacing: 0.07em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.nwcad-reading-card strong {
+  display: block;
+  margin-top: 0.24rem;
+  color: var(--ink);
+  font-size: 0.76rem;
+  line-height: 1.08;
+  font-weight: 860;
+}
+
+.nwcad-reading-card p {
+  margin: 0.24rem 0 0;
+  color: var(--muted);
+  font-size: 0.58rem;
+  line-height: 1.16;
+}
+
+@keyframes nwcad-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes nwcad-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.68;
+    transform: scale(1.08);
+  }
+}
+
+.nwcad-process-map {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.9fr 1.05fr 1.2fr;
+  gap: 0.86rem;
+  align-items: stretch;
+}
+
+.process-column {
+  position: relative;
+  display: grid;
+  gap: 0.58rem;
+}
+
+.source-column {
+  grid-template-rows: 1fr 1fr;
+}
+
+.source-column::after,
+.gate-column::after {
+  content: "";
+  position: absolute;
+  right: -0.64rem;
+  top: 50%;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-top: 2px solid rgba(96,106,120,0.62);
+  border-right: 2px solid rgba(96,106,120,0.62);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.process-stream,
+.gate-step,
+.route-card {
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.94);
+  box-shadow: 0 12px 26px rgba(47,64,82,0.06);
+}
+
+.process-stream {
+  position: relative;
+  min-height: 6.2rem;
+  overflow: hidden;
+  border-top: 4px solid var(--blue);
+  padding: 0.62rem 0.72rem;
+}
+
+.process-stream.context {
+  border-top-color: var(--green);
+}
+
+.process-stream span,
+.gate-step span,
+.route-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.54rem;
+  font-weight: 830;
+  letter-spacing: 0.07em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.process-stream strong {
+  display: block;
+  margin-top: 0.28rem;
+  color: var(--ink);
+  font-size: 0.9rem;
+  line-height: 1.05;
+  font-weight: 860;
+}
+
+.process-stream p,
+.route-card p {
+  margin: 0.28rem 0 0;
+  color: var(--muted);
+  font-size: 0.61rem;
+  line-height: 1.12;
+}
+
+.token-lanes {
+  position: relative;
+  display: grid;
+  gap: 0.22rem;
+  margin-top: 0.62rem;
+  padding-right: 0.25rem;
+  overflow: hidden;
+}
+
+.token-lanes::after {
+  content: "";
+  position: absolute;
+  top: -0.2rem;
+  bottom: -0.2rem;
+  width: 0.18rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.82);
+  box-shadow: 0 0 0.5rem rgba(255,255,255,0.9);
+  animation: nwcad-lane-sweep 3.6s ease-in-out infinite;
+}
+
+.token-lanes i {
+  display: block;
+  width: var(--w);
+  height: 0.28rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(31,95,147,0.78), rgba(31,95,147,0.28));
+}
+
+.process-stream.context .token-lanes i {
+  background: linear-gradient(90deg, rgba(15,118,110,0.78), rgba(15,118,110,0.26));
+}
+
+.gate-column {
+  grid-template-rows: 1fr 1fr;
+}
+
+.gate-column::before {
+  content: "";
+  position: absolute;
+  left: 1.05rem;
+  top: 26%;
+  bottom: 26%;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(31,95,147,0.26), rgba(15,118,110,0.28));
+}
+
+.gate-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.1rem 1fr;
+  gap: 0.6rem;
+  align-items: start;
+  border-left: 5px solid var(--amber);
+  padding: 0.62rem 0.68rem 0.68rem;
+}
+
+.gate-step.compare {
+  border-left-color: var(--blue);
+}
+
+.gate-step.confidence {
+  border-left-color: var(--green);
+}
+
+.gate-step b {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.72rem;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(16,23,34,0.13);
+}
+
+.gate-step strong {
+  display: block;
+  margin-top: 0.22rem;
+  color: var(--ink);
+  font-size: 0.82rem;
+  line-height: 1.08;
+  font-weight: 850;
+}
+
+.signal-meter {
+  grid-column: 2;
+  position: relative;
+  display: grid;
+  gap: 0.22rem;
+  margin-top: 0.54rem;
+  padding: 0.38rem;
+  border-radius: 5px;
+  background: rgba(244,248,252,0.72);
+}
+
+.signal-meter i {
+  display: block;
+  height: 0.24rem;
+  border-radius: 999px;
+}
+
+.signal-meter.pressure i:nth-child(1) {
+  width: 72%;
+  background: rgba(31,95,147,0.7);
+}
+
+.signal-meter.pressure i:nth-child(2) {
+  width: 44%;
+  background: rgba(15,118,110,0.56);
+}
+
+.signal-meter.margin i:nth-child(1) {
+  width: 84%;
+  background: rgba(15,118,110,0.76);
+}
+
+.signal-meter.margin i:nth-child(2) {
+  width: 38%;
+  background: rgba(15,118,110,0.26);
+}
+
+.route-column {
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.46rem;
+}
+
+.route-card {
+  position: relative;
+  border-left: 5px solid var(--blue);
+  padding: 0.48rem 0.64rem 0.52rem;
+}
+
+.route-card::before {
+  content: "";
+  position: absolute;
+  left: -1.08rem;
+  top: 50%;
+  width: 0.82rem;
+  height: 1px;
+  background: rgba(96,106,120,0.32);
+}
+
+.route-card.use {
+  border-left-color: var(--green);
+}
+
+.route-card.fallback {
+  border-left-color: var(--amber);
+}
+
+.route-card strong {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--ink);
+  font-size: 0.86rem;
+  line-height: 1.05;
+  font-weight: 870;
+}
+
+.nwcad-process-note {
+  border-left: 4px solid var(--amber);
+  background: rgba(251,247,242,0.72);
+  color: var(--ink);
+  font-size: 0.72rem;
+  line-height: 1.18;
+  font-weight: 760;
+  padding: 0.46rem 0.62rem;
+}
+
+@keyframes nwcad-lane-sweep {
+  0%,
+  100% {
+    left: -0.3rem;
+    opacity: 0;
+  }
+
+  18%,
+  82% {
+    opacity: 0.75;
+  }
+
+  50% {
+    left: calc(100% - 0.1rem);
+    opacity: 0.38;
+  }
+}
+
 .split-title {
   display: grid;
   grid-template-columns: 0.86fr 1.14fr;

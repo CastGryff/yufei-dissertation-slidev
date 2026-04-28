@@ -566,7 +566,7 @@ class: section-slide
 
 <div v-click class="study-reveal nwcad-opener">
 <div class="subtitle mt-4">
-Preserve already-correct answers under neutral or distracting context, yet still use genuinely corrective evidence.
+Can a context-aware decoder use added context without making already-correct answers worse?
 </div>
 
 <div class="neutral-example mt-3">
@@ -582,58 +582,126 @@ Preserve already-correct answers under neutral or distracting context, yet still
 </div>
 </div>
 <div class="answer-compare mt-3">
-<div><span>With-context / context-aware decoders</span><strong>1978</strong></div>
-<div><span>NWCAD</span><strong>January 1, 1979</strong></div>
+<div><span>CAD / AdaCAD / CoCoA</span><strong>1978</strong></div>
+<div><span>Desired behavior</span><strong>January 1, 1979</strong></div>
 </div>
 </div>
 
 <div class="takeaway red nwcad-opener-takeaway mt-2">
-The added context creates type-matched pressure without entailing the gold answer; changing the already-correct answer is neutral regression.
+The added context creates type-matched pressure without entailing the gold answer; the next slides name this failure and show how NWCAD avoids it.
 </div>
 </div>
 
 ---
+class: cad-style-slide
+---
 
-<div class="kicker">Controlled Benchmark</div>
+<div class="kicker">Prior Decode-Time Methods</div>
 
-# The benchmark separates two objectives
+# CAD-style decoding can help, but it lacks a do-no-harm guarantee
 
-<div class="grid-3 mt-7">
-<div class="tile blue"><h3>Restated</h3><p>Neutral context restates or aligns with the answer.</p></div>
-<div class="tile red"><h3>Distractor</h3><p>Incorrect but non-entailing pressure.</p></div>
-<div class="tile green"><h3>Helpful</h3><p>Context provides evidence that the baseline lacks.</p></div>
+<div class="cad-process mt-5">
+<div class="cad-node prior">
+<div class="cad-node-title">No-context stream</div>
+<div class="cad-node-sub">question only</div>
+<div class="cad-bars">
+<div class="cad-bar-row"><span>1979</span><i style="--w: 86%"></i></div>
+<div class="cad-bar-row muted"><span>1978</span><i style="--w: 38%"></i></div>
+</div>
 </div>
 
-<div class="fine mt-5">Restated and distractor examples are baseline-correct neutral cases; helpful examples are baseline-wrong but context-correct cases.</div>
-<div class="fine mt-2">The helpful slice isolates context utilization; it is not intended to estimate natural prevalence.</div>
+<div class="cad-node context">
+<div class="cad-node-title">With-context stream</div>
+<div class="cad-node-sub">question + added passage</div>
+<div class="cad-bars">
+<div class="cad-bar-row muted"><span>1979</span><i style="--w: 62%"></i></div>
+<div class="cad-bar-row"><span>1978</span><i style="--w: 78%"></i></div>
+</div>
+</div>
 
-<div class="flow mt-8">
-<div class="step" v-click>Preserve neutral</div>
-<div class="arrow" v-after>+</div>
-<div class="step" v-after>Use helpful</div>
-<div class="arrow" v-after>-></div>
-<div class="step" v-after>No-worse decoding</div>
+<div class="cad-node operator">
+<div class="cad-node-title">Contrast and tilt</div>
+<div class="cad-node-sub">tokens boosted by context get amplified</div>
+<div class="cad-delta">z<sub>c</sub><sup>t</sup> - z<sub>0</sub><sup>t</sup></div>
+</div>
+
+<div class="cad-node output">
+<div class="cad-node-title">Shifted logits</div>
+<div class="cad-node-sub">next token can flip</div>
+<div class="cad-token-result"><span>1978</span><strong>selected</strong></div>
+</div>
+</div>
+
+<div class="cad-formula-label mt-3">Representative CAD update</div>
+
+$$
+\small
+\begin{aligned}
+z_{\mathrm{CAD}}^{t}
+&= z_c^t + \alpha\left(z_c^t - z_0^t\right) \\
+&= (1+\alpha)z_c^t - \alpha z_0^t
+\end{aligned}
+$$
+
+<div class="grid-3 evidence-strip mt-3">
+<div class="tile green"><h3>Goal</h3><p>Bias generation toward tokens that become more likely when context is present.</p></div>
+<div class="tile amber"><h3>Variants</h3><p>CAD uses fixed &alpha;; AdaCAD and CoCoA adapt the tilt with divergence and confidence signals.</p></div>
+<div class="tile red"><h3>Failure mode</h3><p>Weak context can still shift a token choice and cascade into a different answer.</p></div>
 </div>
 
 ---
 
-<div class="kicker">Neutral Regression Evidence</div>
+<div class="kicker">Neutral Regression</div>
 
-# In the baseline-correct controlled slice, added context often induces regressions
+# Neutral regression names the failure
 
 <div class="grid-2 wide-right mt-5">
 <div>
-<div class="tile red"><h3>Controlled filter</h3><p>Baseline-correct filtering makes no-context accuracy 100% by construction.</p></div>
-<div class="tile amber mt-4"><h3>Regression signal</h3><p>Within baseline-correct neutral cases, a with-context drop is a context-induced regression.</p></div>
+<div class="tile red"><h3>Definition</h3><p>Neutral regression occurs when the model overwrites an already-correct answer even though the added context is effectively non-informative.</p></div>
+<div class="tile blue mt-4"><h3>Controlled filter</h3><p>Baseline-correct filtering makes no-context accuracy 100% by construction.</p></div>
+<div class="tile amber mt-4"><h3>Regression signal</h3><p>Within baseline-correct neutral cases, any drop under with-context decoding is an avoidable context-induced regression.</p></div>
 </div>
 <div class="media-rail"><img src="/assets/nwcad-neutral-regression.png" class="media tall"></div>
 </div>
 
 ---
 
+<div class="kicker">Controlled Benchmark</div>
+
+# Restate-hard and Distractor-hard make neutral regression measurable
+
+<div class="grid-2 mt-6">
+<div class="tile blue">
+<h3>Restate-hard</h3>
+<p>The added passage is aligned with the gold answer, but the example is still filtered to cases where the no-context answer was already correct.</p>
+</div>
+<div class="tile red">
+<h3>Distractor-hard</h3>
+<p>The added passage creates type-matched pressure without entailing the gold answer, making overreaction easy to observe.</p>
+</div>
+</div>
+
+<div class="neutral-example mt-5">
+<div class="example-question">Gold answer: March 1, 1781</div>
+<div class="grid-2 mt-3">
+<div class="tile blue">
+<h3>Restated context</h3>
+<p>The Articles of Confederation officially went into effect on March 1, 1781, marking the first governing framework for the newly independent states.</p>
+</div>
+<div class="tile red">
+<h3>Distractor context</h3>
+<p>The Articles of Confederation were drafted in 1777, and it took until 1780 for all states to ratify the articles.</p>
+</div>
+</div>
+</div>
+
+<div class="fine mt-4">Both neutral slices are baseline-correct by design; helpful examples are introduced separately to test context utilization.</div>
+
+---
+
 <div class="kicker">Trade-off</div>
 
-# Separating do-no-harm from context utilization clarifies the decoder choice
+# We cannot simply always lean toward model knowledge
 
 <div class="tradeoff-plane mt-5">
 <div class="axis-y">Preservation</div>
@@ -648,110 +716,149 @@ The added context creates type-matched pressure without entailing the gold answe
 
 <div class="grid-2 mt-4">
 <div class="tile blue">
-<h3>Do-no-harm preservation</h3>
-<p>Preserve baseline-correct answers when added context is neutral or distracting.</p>
+<h3>Pure backoff is too conservative</h3>
+<p>It protects baseline-correct answers, but it would miss examples where the context contains the missing evidence.</p>
 </div>
 <div class="tile green">
-<h3>Context utilization</h3>
-<p>Questions where the context can correct the answer.</p>
+<h3>Pure context pressure is too aggressive</h3>
+<p>It can use useful evidence, but it can also overreact to distractor passages.</p>
 </div>
 </div>
 
 ---
 
-<div class="kicker">Two-Stream Setup</div>
+<div class="kicker">Helpful Context</div>
 
-# Compare generation with and without context at every token
+# Helpful examples define the other side of the objective
 
-<div class="grid-2 mt-7">
-<div class="equation">
-No-context stream:<br>
-<strong>z<sub>0</sub><sup>t</sup></strong> -> p<sub>0</sub><sup>t</sup>
+<div class="grid-2 wide-left mt-6">
+<div>
+<div class="neutral-example">
+<div class="example-question">Q: Who voiced the T. rex in The Good Dinosaur?</div>
+<div class="grid-2 mt-3">
+<div class="tile amber">
+<h3>No-context / CAD-style drift</h3>
+<p>Woody Harrelson</p>
 </div>
-<div class="equation">
-With-context stream:<br>
-<strong>z<sub>c</sub><sup>t</sup></strong> -> p<sub>c</sub><sup>t</sup>
+<div class="tile green">
+<h3>Context-supported answer</h3>
+<p>Sam Elliott</p>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div class="tile green"><h3>Context utilization</h3><p>When the context is genuinely informative, the decoder should shift toward the context stream rather than over-trust the parametric answer.</p></div>
+<div class="tile red mt-4"><h3>The design tension</h3><p>The same system must use helpful evidence while preventing the neutral regressions shown earlier.</p></div>
 </div>
 </div>
 
-<div class="grid-2 mt-7">
-<div class="tile blue"><h3>Context pressure</h3><p>Jensen-Shannon divergence between p<sub>c</sub><sup>t</sup> and p<sub>0</sub><sup>t</sup>.</p></div>
-<div class="tile green"><h3>Confidence</h3><p>Top-1 margin: how decisive each stream is about the next token.</p></div>
+<div class="flow mt-6">
+<div class="step">Preserve neutral</div>
+<div class="arrow">+</div>
+<div class="step">Use helpful</div>
+<div class="arrow">-></div>
+<div class="step">No-worse decoding</div>
 </div>
 
-<div class="fine mt-5">Evaluation setting: logit access, greedy decoding, top-K union JS with K = 50, and thresholds tuned on Llama-3.1-8B then transferred.</div>
-
+---
+class: nwcad-gate-slide
 ---
 
 <div class="kicker">NWCAD Gate</div>
 
-# A three-way decision backs off or uses context when confident
+# NWCAD turns context-aware decoding into regime selection
 
-<div class="grid-3 mt-6">
-<div>
-<div class="tile blue"><h3>Stage 1: preserve</h3><p>If context pressure is low and no-context is confident, copy the no-context logits exactly under greedy decoding.</p></div>
-<div class="tile green mt-4"><h3>Stage 2: use context</h3><p>If the context stream is confident, use the context-conditioned logits.</p></div>
+<div class="nwcad-process-map mt-5">
+<div class="process-column source-column">
+<div class="process-stream prior">
+<span>No-context stream</span>
+<strong>Question only</strong>
+<div class="token-lanes">
+<i style="--w: 82%"></i>
+<i style="--w: 56%"></i>
+<i style="--w: 34%"></i>
 </div>
-<div class="tile amber">
-<h3>Gate signals</h3>
-<p>Jensen-Shannon divergence estimates context pressure; top-1 margins estimate stream confidence.</p>
-<p class="fine mt-5">Low pressure plus confident no-context favors preservation. Confident context favors context use.</p>
+<p>baseline next-token distribution</p>
 </div>
-<div>
-<div class="tile amber"><h3>Fallback</h3><p>Use a plug-in contrastive decoder only when neither gate is decisive.</p></div>
-<div class="tile red mt-4"><h3>Regime selection</h3><p>Context-aware decoding becomes a choice among preservation, context use, and fallback rather than continuous logit tilting.</p></div>
+<div class="process-stream context">
+<span>With-context stream</span>
+<strong>Question + passage</strong>
+<div class="token-lanes">
+<i style="--w: 62%"></i>
+<i style="--w: 84%"></i>
+<i style="--w: 42%"></i>
+</div>
+<p>context next-token distribution</p>
 </div>
 </div>
 
-<div class="takeaway mt-5">
-NWCAD treats context-aware decoding as regime selection rather than continuous logit tilting.
+<div class="process-column gate-column">
+<div class="gate-step compare">
+<b>1</b>
+<div>
+<span>Read context pressure</span>
+<strong>How much did the passage move the distribution?</strong>
 </div>
+<div class="signal-meter pressure"><i></i><i></i></div>
+</div>
+<div class="gate-step confidence">
+<b>2</b>
+<div>
+<span>Read confidence</span>
+<strong>Which stream has a decisive top answer?</strong>
+</div>
+<div class="signal-meter margin"><i></i><i></i></div>
+</div>
+</div>
+
+<div class="process-column route-column">
+<div class="route-card preserve">
+<span>If pressure is low and baseline is confident</span>
+<strong>Preserve</strong>
+<p>keep the no-context answer</p>
+</div>
+<div class="route-card use">
+<span>If context is confident</span>
+<strong>Use context</strong>
+<p>follow the passage evidence</p>
+</div>
+<div class="route-card fallback">
+<span>If neither signal is decisive</span>
+<strong>Fallback</strong>
+<p>use CAD-style contrast only then</p>
+</div>
+</div>
+</div>
+
+<div class="nwcad-process-note mt-3">NWCAD is a routing rule: measure pressure and confidence, then select one decoding regime instead of continuously tilting logits.</div>
 
 ---
 
 <div class="kicker">Controlled Evaluation</div>
 
-# NWCAD moves up and to the right
+# Controlled experiments show NWCAD moves up and right
 
 <div class="media-rail mt-4">
 <img src="/assets/nwcad-tradeoff.png" class="media tall">
 </div>
 
-<div class="caption">Controlled augmented NQ-open slices. Each panel is one open-weight backbone; x-axis is Helpful accuracy, and the vertical bar spans Restated and Distractor baseline-correct preservation.</div>
-
----
-
-<div class="kicker">Qualitative Example</div>
-
-# Qualitative examples: reducing regressions while using helpful context
-
-<table class="table-lite mt-5">
-<thead><tr><th>Slice</th><th>Question</th><th>Bad behavior</th><th>NWCAD behavior</th></tr></thead>
-<tbody>
-<tr><td>Restated</td><td>Dumbledore actor after the first one died</td><td>Contrastive decoders flip to Richard Harris</td><td>Preserves Michael Gambon</td></tr>
-<tr><td>Distractor</td><td>When did the US normalize relations with China?</td><td>Distractor pulls answer toward 1978</td><td>Preserves January 1, 1979</td></tr>
-<tr><td>Helpful</td><td>Voice of the T. rex in The Good Dinosaur</td><td>Baseline gives wrong answer</td><td>Uses context: Sam Elliott</td></tr>
-</tbody>
-</table>
-
-<div class="takeaway mt-6">
-When the context is non-informative and the no-context answer is already correct, a decoder should preserve the no-context output; when context is informative, it should shift toward context to correct the answer.
-</div>
+<div class="caption">Controlled augmented NQ-open slices. Each panel is one open-weight backbone; x-axis is Helpful accuracy, and the vertical bar spans Restate-hard and Distractor-hard baseline-correct preservation.</div>
 
 ---
 
 <div class="kicker">Full-Slice Evaluation</div>
 
-# NWCAD reduces neutral regressions across evaluated slices
+# Full sweep shows the controlled trade-off carries to broader slices
 
 <div class="media-rail full-figure mt-4">
 <img src="/assets/nwcad-fullslice.png" class="media tall">
 </div>
 
 <div class="grid-3 evidence-strip mt-4">
-<div class="tile blue"><h3>Regression reduction</h3><p>Reduced failures under distractor contexts in the evaluated settings.</p></div>
-<div class="tile green"><h3>Helpful context</h3><p>Helpful-context gains are largely preserved across the evaluated slices.</p></div>
-<div class="tile amber"><h3>Scope</h3><p>Logit access, greedy decoding, transferred thresholds; representative slices include NQ-SYNTH/SWAP, HotpotQA, PopQA, TabMWP, ToFuEval, and ExpertQA.</p></div>
+<div class="tile blue"><h3>Distractor-heavy gains</h3><p>The largest gains appear in distractor-heavy settings where neutral regression is most visible.</p></div>
+<div class="tile green"><h3>Context-defined tasks</h3><p>NWCAD also improves helpful and context-defined tasks such as NQ-SYNTH and NQ-SWAP.</p></div>
+<div class="tile amber"><h3>Broader scope</h3><p>Full-slice results include HotpotQA, PopQA, TabMWP, ToFuEval, and ExpertQA.</p></div>
 </div>
 
 ---
@@ -781,7 +888,7 @@ When the context is non-informative and the no-context answer is already correct
 
 <div class="kicker">Routing and Cost</div>
 
-# The fallback path is rare, and the latency cost stays small
+# Ablation detail: fallback is rare, and the latency cost stays small
 
 <div class="grid-2 mt-5">
 <div>
