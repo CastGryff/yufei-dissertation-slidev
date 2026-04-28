@@ -1742,6 +1742,22 @@
   color: rgba(96,106,120,0.48);
 }
 
+.deck-clock {
+  position: absolute;
+  top: 0.72rem;
+  right: 3.25rem;
+  z-index: 30;
+  padding: 0.08rem 0.26rem;
+  color: rgba(96,106,120,0.72);
+  font-size: 0.58rem;
+  font-weight: 760;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  background: rgba(247,249,251,0.78);
+  pointer-events: none;
+}
+
 .deck-progress-simple {
   position: absolute;
   left: 3.25rem;
