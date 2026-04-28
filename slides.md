@@ -571,17 +571,12 @@ Can a context-aware decoder use added context without making already-correct ans
 
 <div class="neutral-example mt-3">
 <div class="example-question">Q: When did the U.S. normalize relations with China?</div>
-<div class="grid-2 mt-3">
-<div class="tile blue">
-<h3>Gold / no-context answer</h3>
-<p>January 1, 1979</p>
-</div>
-<div class="tile amber">
-<h3>Distractor context excerpt</h3>
+<div class="nwcad-context-excerpt mt-3">
+<span>Added distractor context excerpt</span>
 <p>Although the process culminated in a major announcement in 1978, it reflected decades of evolving U.S.-China relations.</p>
 </div>
-</div>
 <div class="answer-compare mt-3">
+<div><span>Gold / no-context answer</span><strong>January 1, 1979</strong></div>
 <div><span>CAD / AdaCAD / CoCoA</span><strong>1978</strong></div>
 <div><span>Desired behavior</span><strong>January 1, 1979</strong></div>
 </div>
@@ -726,39 +721,47 @@ $$
 </div>
 
 ---
+class: helpful-context-slide
+---
 
 <div class="kicker">Helpful Context</div>
 
 # Helpful examples define the other side of the objective
 
-<div class="grid-2 wide-left mt-6">
-<div>
-<div class="neutral-example">
-<div class="example-question">Q: Who voiced the T. rex in The Good Dinosaur?</div>
-<div class="grid-2 mt-3">
-<div class="tile amber">
-<h3>No-context / CAD-style drift</h3>
-<p>Woody Harrelson</p>
+<div class="helpful-canvas mt-5">
+<div class="helpful-question">Q: Who voiced the T. rex in <em>The Good Dinosaur</em>?</div>
+
+<div class="helpful-path mt-4">
+<div class="helpful-stage drift">
+<span>Without useful context</span>
+<strong>Woody Harrelson</strong>
+<p>the model can rely on the wrong parametric association</p>
 </div>
-<div class="tile green">
-<h3>Context-supported answer</h3>
-<p>Sam Elliott</p>
+
+<div class="helpful-connector">
+<span>helpful passage should change the answer</span>
 </div>
-</div>
-</div>
-</div>
-<div>
-<div class="tile green"><h3>Context utilization</h3><p>When the context is genuinely informative, the decoder should shift toward the context stream rather than over-trust the parametric answer.</p></div>
-<div class="tile red mt-4"><h3>The design tension</h3><p>The same system must use helpful evidence while preventing the neutral regressions shown earlier.</p></div>
+
+<div class="helpful-stage evidence">
+<span>Context-supported answer</span>
+<strong>Sam Elliott</strong>
+<p>the passage supplies evidence missing from the baseline</p>
 </div>
 </div>
 
-<div class="flow mt-6">
-<div class="step">Preserve neutral</div>
-<div class="arrow">+</div>
-<div class="step">Use helpful</div>
-<div class="arrow">-></div>
-<div class="step">No-worse decoding</div>
+<div class="helpful-tension mt-5">
+<div>
+<span>Design tension</span>
+<strong>Use helpful evidence without causing neutral regression.</strong>
+</div>
+<div class="helpful-formula">
+<b>Preserve neutral</b>
+<i>+</i>
+<b>Use helpful</b>
+<i>-></i>
+<b>No-worse decoding</b>
+</div>
+</div>
 </div>
 
 ---
