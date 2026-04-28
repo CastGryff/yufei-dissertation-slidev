@@ -61,7 +61,7 @@ mdc: true
 
 <div class="byline mt-7">
 <div class="presenter-name">Yufei Tao</div>
-<div>Dissertation Defense · April 2026</div>
+<div>Dissertation Defense · April 30, 2026</div>
 <div>Department of Computer Science · Portland State University</div>
 <div class="committee-block">
 <div><span>Chair</span> Dr. Ameeta Agrawal</div>
@@ -261,7 +261,7 @@ class: section-slide
 # Conversational adaptability and response efficiency in role-play interactions
 
 <div class="subtitle mt-6">
-Characterizing social-context adaptability in CRD.
+CRD as a testbed for user motives and model naturalness.
 </div>
 
 <div class="fine mt-5">The CRD dataset contains 57 participants, 85 conversations, and 1,742 utterances across regular and role-play ChatGPT-3.5 interactions collected in March-April 2023.</div>
@@ -1079,8 +1079,6 @@ The next step is to evaluate whether context governs the construction and use of
 <p>For support throughout the PhD and through the long path from drafts to dissertation.</p>
 </div>
 </div>
-
-<div class="fine mt-6">Title icons made by Freepik from Flaticon.</div>
 
 ---
 
