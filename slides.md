@@ -136,9 +136,9 @@ class: pop-slide
 
 <div class="kicker">Central Claim</div>
 
-# Across the models and settings studied here, LLMs are context-sensitive, yet context only partially governs their outputs
+# LLMs are context-sensitive, yet context only partially governs their outputs
 
-<div class="grid-2 wide-right mt-7">
+<div class="grid-2 wide-right mt-5">
 <div class="tile blue">
 <h3>They respond to context</h3>
 <p>Current LLMs respond to role cues, supplied evidence, prompt structure, and decode-time controls.</p>
@@ -149,18 +149,6 @@ class: pop-slide
 </div>
 </div>
 
-<div class="takeaway mt-7">
-Together, the four studies move from empirical diagnosis to a bounded decode-time intervention for one downstream reliability problem.
-</div>
-
----
-class: pop-slide
----
-
-<div class="kicker">Roadmap</div>
-
-# From diagnosis to intervention
-
 <div class="storyline compact rowed mt-5">
 <div class="story-row"><div><span class="tag blue">1</span></div><div><strong>Role-play interaction</strong></div><div>Social adaptation</div></div>
 <div class="story-row"><div><span class="tag green">2</span></div><div><strong>Contextual vs. parametric knowledge</strong></div><div>Knowledge-consistent grounding</div></div>
@@ -169,7 +157,7 @@ class: pop-slide
 <div class="story-row"><div><span class="tag violet">5</span></div><div><strong>Synthesis</strong></div><div>Context as a control problem</div></div>
 </div>
 
-<div class="fine mt-5">The dissertation asks how LLMs adapt to context, how stable grounding is under harder conditions, and whether inference-time control can reduce one reliability failure.</div>
+<div class="fine mt-4">The four studies move from empirical diagnosis to a bounded decode-time intervention for one downstream reliability problem.</div>
 
 ---
 
@@ -260,6 +248,7 @@ class: section-slide
 
 # Conversational adaptability and response efficiency in role-play interactions
 
+<div v-click class="study-reveal">
 <div class="subtitle mt-6">
 CRD as a testbed for user motives and model naturalness.
 </div>
@@ -267,17 +256,26 @@ CRD as a testbed for user motives and model naturalness.
 <div class="fine mt-5">The CRD dataset contains 57 participants, 85 conversations, and 1,742 utterances across regular and role-play ChatGPT-3.5 interactions collected in March-April 2023.</div>
 <div class="fine mt-2">User motives and model naturalness were annotated with substantial agreement.</div>
 
+<div class="grid-3 mt-5">
+<div class="tile blue"><h3>We introduced CRD</h3><p>A human-AI role-play dataset with utterance-level user motive and model naturalness labels.</p></div>
+<div class="tile amber"><h3>Social adaptation has limits</h3><p>Role cues improve naturalness while verbosity and over-helpfulness persist.</p></div>
+<div class="tile green"><h3>Bridge</h3><p>If role cues only partially govern behavior, the next question is whether supplied evidence governs factual content.</p></div>
+</div>
+</div>
+
 <div class="section-paper-ref">
 Paper: Tao et al., "ChatGPT Role-play Dataset: Analysis of User Motives and Model Naturalness," LREC-COLING 2024.
 </div>
 
 ---
 
-<div class="kicker">Result 1</div>
+<div class="kicker">Study 1 Evidence</div>
 
-# Role-play changes conversation rhythm, while the verbosity gap remains
+# Role-play changes rhythm and naturalness, while assistant defaults remain
 
-<table class="table-lite mt-5">
+<div class="grid-2 wide-left mt-4">
+<div>
+<table class="table-lite compact">
 <thead>
 <tr><th>Measure</th><th class="num">Vanilla</th><th class="num">Boss</th><th class="num">Classmate</th></tr>
 </thead>
@@ -285,42 +283,13 @@ Paper: Tao et al., "ChatGPT Role-play Dataset: Analysis of User Motives and Mode
 <tr><td>Average conversation length, turns</td><td class="num"><strong>29.59</strong></td><td class="num">14.57</td><td class="num">17.11</td></tr>
 <tr><td>Average human utterance length, words</td><td class="num">12.18</td><td class="num"><strong>20.58</strong></td><td class="num">19.06</td></tr>
 <tr><td>Average ChatGPT utterance length, words</td><td class="num"><strong>77.66</strong></td><td class="num">35.78</td><td class="num">46.10</td></tr>
-<tr><td>Human questions as percent of conversation</td><td class="num"><strong>26.34</strong></td><td class="num">21.32</td><td class="num">21.29</td></tr>
-<tr><td>ChatGPT questions as percent of conversation</td><td class="num">14.69</td><td class="num">20.34</td><td class="num"><strong>32.57</strong></td></tr>
 </tbody>
 </table>
-
-<div class="takeaway mt-5">
-Users in role-play produce longer turns; ChatGPT changes too, while remaining systematically more verbose than human turns.
+<div class="tile blue mt-4"><h3>Takeaway</h3><p>CRD makes social-context adaptation measurable: users and models both change under role-play, but generic assistant habits remain visible.</p></div>
 </div>
-
----
-
-<div class="kicker">Result 2</div>
-
-# Role-play raises naturalness, but assistant defaults remain
-
-<div class="grid-2 crd-naturalness-figures mt-4">
-<div class="media-rail"><img src="/assets/user-motives.png" class="media short"></div>
+<div>
 <div class="media-rail"><img src="/assets/model-naturalness.png" class="media short"></div>
 </div>
-
-<div class="takeaway mt-4">
-Role cues suppress "as an AI" behavior and increase naturalness; verbosity and over-helpfulness remain.
-</div>
-
-<div class="fine mt-3">Naturalness is a pragmatic annotation of conversational behavior, not a measure of task success or factual correctness.</div>
-
----
-
-<div class="kicker">Study 1 Takeaway</div>
-
-# CRD shows that social context changes LLM behavior unevenly
-
-<div class="grid-3 mt-8">
-<div class="tile blue"><h3>We introduced CRD</h3><p>A human-AI role-play dataset with utterance-level user motive and model naturalness labels.</p></div>
-<div class="tile amber"><h3>Social adaptation has limits</h3><p>Role cues improve naturalness while verbosity, over-helpfulness, and partial misreading of user intent persist.</p></div>
-<div class="tile green"><h3>From roles to evidence</h3><p>If role cues only partially govern behavior, the next question is whether supplied evidence governs factual content.</p></div>
 </div>
 
 ---
@@ -331,19 +300,10 @@ class: section-slide
 
 # When Context Leads but Parametric Memory Follows
 
+<div v-click class="study-reveal">
 <div class="subtitle mt-6">
 Contextual vs. parametric knowledge in LLM outputs.
 </div>
-
-<div class="section-paper-ref">
-Paper: Tao et al., "When Context Leads but Parametric Memory Follows in Large Language Models," EMNLP 2024.
-</div>
-
----
-
-<div class="kicker">Operational Definitions</div>
-
-# Contextual and parametric knowledge are labels over atomic response content
 
 <div class="atom-definition mt-5">
 <div class="atom-label">Atomic response content</div>
@@ -351,7 +311,7 @@ Paper: Tao et al., "When Context Leads but Parametric Memory Follows in Large La
 <div class="atom-desc">Each atom is one factual proposition extracted from the response; each atom is labeled by entailment against the supplied context.</div>
 </div>
 
-<div class="grid-2 mt-5">
+<div class="grid-2 mt-4">
 <div class="tile green">
 <h3>Contextual knowledge (CK)</h3>
 <p>Atomic response content entailed by the supplied context.</p>
@@ -361,48 +321,35 @@ Paper: Tao et al., "When Context Leads but Parametric Memory Follows in Large La
 <p>Atomic response content unsupported by the supplied context; factuality is checked separately.</p>
 </div>
 </div>
-
-<div class="grid-2 evidence-strip mt-5">
-<div class="tile green"><h3>Test item</h3><p>Topic, a chosen number of atomic context sentences, open-ended question, and atomized model response.</p></div>
-<div class="tile blue"><h3>Knowledge-consistent setting</h3><p>Older Wikipedia contexts test grounding while staying broadly compatible with model prior knowledge.</p></div>
 </div>
 
-<div class="takeaway mt-5">
-The evaluation asks which generated claims are supported by the supplied context and which generated claims go beyond it.
+<div class="section-paper-ref">
+Paper: Tao et al., "When Context Leads but Parametric Memory Follows in Large Language Models," EMNLP 2024.
 </div>
 
 ---
 
-<div class="kicker">WikiAtomic Construction</div>
+<div class="kicker">WikiAtomic Construction + Example</div>
 
-# WikiAtomic controls context length and supports atomic CK/PK evaluation
+# WikiAtomic controls context length and maps response atoms to CK/PK
 
-<div class="grid-4 mt-6">
+<div class="grid-2 wide-left mt-4">
+<div>
+<div class="grid-2">
 <div class="metric blue"><div class="value">200</div><div class="label">Wikipedia articles</div></div>
 <div class="metric green"><div class="value">50</div><div class="label">atomic sentences per article</div></div>
 <div class="metric amber"><div class="value">10,000</div><div class="label">atomic sentences</div></div>
 <div class="metric red"><div class="value">4,000</div><div class="label">topic-context instances</div></div>
 </div>
-
-<div class="grid-3 evidence-strip mt-5">
-<div class="tile blue" v-click><h3>Construction</h3><p>High-quality Wikipedia articles are decomposed into atomic sentences; context sizes grow from 2 to 50 sentences.</p></div>
-<div class="tile green" v-click><h3>Scoring</h3><p>Model responses are atomized and compared against atomic contexts with the INFUSE entailment scorer at threshold 0.5.</p></div>
-<div class="tile amber" v-click><h3>Models</h3><p>GPT-4o, Claude 3, Llama 3, Mixtral, Mistral, and Phi-3.</p></div>
+<div class="tile blue mt-4"><h3>Evaluation setup</h3><p>Context sizes grow from 2 to 50 sentences; responses are atomized and compared with INFUSE at threshold 0.5 across GPT-4o, Claude 3, Llama 3, Mixtral, Mistral, and Phi-3.</p></div>
 </div>
-
-<div class="fine mt-5">Validation: 1,000 atomic sentences were manually verified; only 12 were insufficiently atomic or had their meaning changed. Threshold calibration: three annotators reviewed ambiguous INFUSE scores.</div>
-
----
-
-<div class="kicker">Example</div>
-
-# Atomic responses are mapped to contextual and parametric knowledge
-
-<div class="media-rail mt-4">
+<div>
+<div class="media-rail">
 <img src="/assets/ckpk-real-example.png" class="media tall">
 </div>
-
-<div class="caption">An example of context, question, model response, and the list of atomic responses mapped to contextual knowledge and parametric knowledge.</div>
+<div class="caption">Context, question, model response, and atomic response labels.</div>
+</div>
+</div>
 
 ---
 
@@ -438,38 +385,24 @@ The evaluation asks which generated claims are supported by the supplied context
 
 ---
 
-<div class="kicker">Similarity Analysis</div>
+<div class="kicker">Similarity + Faithfulness</div>
 
-# Responses tend to include similar contextual knowledge and topically related parametric content
+# Similarity and factuality separate relatedness from support
 
-<div class="similarity-grid mt-4">
-<div class="media-rail"><img src="/assets/sim-local-local-gpt4o.png" class="media sim"><div class="caption">Local vs. local</div></div>
-<div class="media-rail"><img src="/assets/sim-global-global-gpt4o.png" class="media sim"><div class="caption">Global vs. global</div></div>
-<div class="media-rail"><img src="/assets/sim-local-global-combined.png" class="media sim-wide"><div class="caption">Local vs. global</div></div>
-</div>
-
-<div class="grid-3 evidence-strip mt-4">
-<div class="tile blue"><h3>Contextual knowledge</h3><p>Becomes increasingly similar with larger contexts.</p></div>
-<div class="tile amber"><h3>Parametric knowledge</h3><p>Repeatedly draws on certain pieces of information, though less uniformly than contextual knowledge.</p></div>
-<div class="tile green"><h3>CK/PK similarity</h3><p>Rises to around 0.6, suggesting related rather than unrelated parametric content.</p></div>
-</div>
-
-<div class="fine mt-4">SBERT sentence-embedding similarity supports topical relatedness, not usefulness or factual support.</div>
-
----
-
-<div class="kicker">Faithfulness</div>
-
-# FActScore factuality evaluation improves for PK-classified content as context increases
-
-<div class="grid-2 wide-left mt-5">
-<div class="media-rail"><img src="/assets/factscore.png" class="media tall"></div>
+<div class="grid-2 wide-left mt-4 similarity-slide">
 <div>
-<div class="claim small">PK factuality scores improve.</div>
-<p class="mt-4">Residual parametric knowledge remains at larger context sizes.</p>
-<div class="takeaway mt-6">
-FActScore factuality evaluation checks factuality separately from CK/PK grounding; supplied evidence changes model outputs in the expected direction, but not deterministically.
+<div class="media-rail similarity-mini-panel">
+<div class="similarity-mini-grid">
+<div class="similarity-mini-item"><img src="/assets/sim-local-local-gpt4o.png" class="media sim-mini"><div class="caption mini">Local vs. local, GPT-4o</div></div>
+<div class="similarity-mini-item"><img src="/assets/sim-global-global-gpt4o.png" class="media sim-mini"><div class="caption mini">Global vs. global, GPT-4o</div></div>
+<div class="similarity-mini-item"><img src="/assets/sim-local-global-combined.png" class="media sim-mini"><div class="caption mini">Local vs. global, all models</div></div>
 </div>
+</div>
+<div class="tile blue mt-3"><h3>Similarity takeaways</h3><p>CK becomes more internally consistent as context grows. PK is not random; it remains topically related to the evidence, which is why similarity alone cannot establish grounding.</p></div>
+</div>
+<div>
+<div class="media-rail"><img src="/assets/factscore.png" class="media sim-wide"></div>
+<div class="tile green mt-3"><h3>FActScore check</h3><p>PK factuality generally improves or stabilizes as context increases, so factuality and grounding must be evaluated separately.</p></div>
 </div>
 </div>
 
@@ -486,7 +419,7 @@ FActScore factuality evaluation checks factuality separately from CK/PK groundin
 </div>
 
 <div class="takeaway mt-8">
-Even in a knowledge-consistent setting, evidence changes outputs without fully governing them. The next chapter extends contextual grounding to multilingual and later-context settings.
+WikiAtomic makes grounding auditable at the atomic-proposition level: even in a knowledge-consistent setting, evidence changes outputs without fully governing them.
 </div>
 
 ---
@@ -497,31 +430,23 @@ class: section-slide
 
 # Lost-in-the-Later: multilingual contextual grounding
 
-<div class="subtitle mt-6">
-The third study tests whether grounding remains stable when evidence appears later in the prompt and when grounding is evaluated across English, Spanish, and Danish.
+<div class="fine mt-5">Paper: Tao et al., "Lost-in-the-Later: Framework for Quantifying Contextual Grounding in Large Language Models," RARA at ICDM 2025.</div>
+
+<div v-click class="study-reveal">
+<div class="subtitle mt-5">
+Tests whether grounding remains stable when evidence appears later in the prompt and across English, Spanish, and Danish.
 </div>
-
-<div class="section-paper-ref">
-Paper: Tao et al., "Lost-in-the-Later: Framework for Quantifying Contextual Grounding in Large Language Models," RARA at ICDM 2025.
-</div>
-
----
-
-<div class="kicker">MultiWikiAtomic + CoPE</div>
-
-# CoPE measures whether later evidence is grounded across languages
 
 <div class="media-rail pipeline-wide mt-4">
 <img src="/assets/lostlater-pipeline.png" class="media cope-pipeline">
 </div>
 
 <div class="grid-3 evidence-strip mt-3">
-<div class="tile blue"><h3>Atomize</h3><p>Input context and model responses are broken into atomic factual propositions.</p></div>
-<div class="tile green"><h3>Label CK vs. PK</h3><p>Each response atom is checked against the supplied context with multilingual NLI.</p></div>
-<div class="tile amber"><h3>Measure recall position</h3><p>Entailed response atoms are traced back to context segments to estimate early, middle, and later evidence use.</p></div>
+<div class="tile blue"><h3>Atomize</h3><p>Context and responses are decomposed into atomic factual propositions.</p></div>
+<div class="tile green"><h3>Label CK vs. PK</h3><p>Multilingual NLI checks response atoms against the supplied context.</p></div>
+<div class="tile amber"><h3>Trace position</h3><p>Entailed atoms -> context quartiles; PK atoms -> response positions.</p></div>
 </div>
-
-<div class="fine mt-3">MultiWikiAtomic extends WikiAtomic to English, Spanish, and Danish. Scale: 6 models, 10,800 question-response pairs, calibrated entailment threshold 0.7. CoPE reports contextual knowledge score and context recall distribution.</div>
+</div>
 
 ---
 
@@ -541,28 +466,16 @@ Most models reach CK scores around 70-75 in English and Spanish, while Danish ha
 
 ---
 
-<div class="kicker">Context Recall</div>
+<div class="kicker">Context Recall + Randomization</div>
 
-# The last quartile is recalled least reliably
+# Later evidence is recalled least reliably, even after randomization
 
 <div class="grid-2 wide-left mt-5">
 <div class="media-rail"><img src="/assets/lostlater-recall-en.png" class="media tall"></div>
 <div>
 <div class="tile amber"><h3>Pattern</h3><p>The first context quartile receives the most recall; the final quartile contributes least.</p></div>
-<div class="tile green mt-4"><h3>Context length</h3><p>The imbalance becomes stronger as context length increases.</p></div>
-<div class="tile red mt-4"><h3>Language</h3><p>The pattern persists across languages; the Danish setting shows larger recall difficulty in this evaluation.</p></div>
-</div>
-</div>
-
----
-
-<div class="kicker">Randomization Check</div>
-
-# Later evidence is still underused after sentence-order randomization
-
-<div class="grid-2 mt-5">
-<div>
-<table class="table-lite">
+<div class="tile green mt-4"><h3>Context length</h3><p>The imbalance becomes stronger as context length increases; PK also concentrates toward later response quartiles.</p></div>
+<table class="table-lite compact mt-4">
 <thead><tr><th>Language</th><th class="num">Absolute Q1-over-Q4 recall gap at context length 50</th></tr></thead>
 <tbody>
 <tr><td>English</td><td class="num">14.63-26.11 pp</td></tr>
@@ -570,25 +483,6 @@ Most models reach CK scores around 70-75 in English and Spanish, while Danish ha
 <tr><td>Danish</td><td class="num">8.91-19.10 pp</td></tr>
 </tbody>
 </table>
-</div>
-<div>
-<div class="tile red"><h3>Interpretation</h3><p>This is not just because Wikipedia articles put easier facts first; the later-context gap remains after order is randomized.</p></div>
-<div class="tile amber mt-4"><h3>Randomized trials</h3><p>450 representative questions across three languages and six models produced 8,100 randomized trials.</p></div>
-</div>
-</div>
-
----
-
-<div class="kicker">PK Position</div>
-
-# Parametric content accumulates later in responses
-
-<div class="grid-2 wide-left mt-5">
-<div class="media-rail"><img src="/assets/lostlater-pk-position.png" class="media tall"></div>
-<div>
-<div class="tile amber"><h3>Pattern</h3><p>PK is increasingly concentrated toward later response quartiles.</p></div>
-<div class="tile green mt-4"><h3>Interpretation</h3><p>Content not grounded in the supplied context can enter after the response has already established a grounded opening.</p></div>
-<div class="tile red mt-4"><h3>Connection</h3><p>This strengthens the position-bias account: later prompt evidence is underused while later response content is more likely to draw on PK.</p></div>
 </div>
 </div>
 
@@ -668,21 +562,14 @@ class: section-slide
 
 # No-Worse Context-Aware Decoding
 
-<div class="subtitle mt-6">
-NWCAD treats context use as a routing problem: preserve already-correct answers when added context is neutral or distracting, yet still use context when it is genuinely corrective.
+<div class="fine mt-4">Paper: Tao and Agrawal, "No-Worse Context-Aware Decoding: Preventing Neutral Regression in Context-Conditioned Generation," Findings of ACL 2026.</div>
+
+<div v-click class="study-reveal nwcad-opener">
+<div class="subtitle mt-4">
+Preserve already-correct answers under neutral or distracting context, yet still use genuinely corrective evidence.
 </div>
 
-<div class="section-paper-ref">
-Paper: Tao and Agrawal, "No-Worse Context-Aware Decoding: Preventing Neutral Regression in Context-Conditioned Generation," Findings of ACL 2026.
-</div>
-
----
-
-<div class="kicker">Neutral Regression</div>
-
-# Neutral regression: weak context overwrites a correct answer
-
-<div class="neutral-example mt-5">
+<div class="neutral-example mt-3">
 <div class="example-question">Q: When did the U.S. normalize relations with China?</div>
 <div class="grid-2 mt-3">
 <div class="tile blue">
@@ -700,8 +587,9 @@ Paper: Tao and Agrawal, "No-Worse Context-Aware Decoding: Preventing Neutral Reg
 </div>
 </div>
 
-<div class="takeaway red mt-4">
-The added context creates type-matched pressure, but it does not entail the gold answer. Changing the already-correct answer is neutral regression.
+<div class="takeaway red nwcad-opener-takeaway mt-2">
+The added context creates type-matched pressure without entailing the gold answer; changing the already-correct answer is neutral regression.
+</div>
 </div>
 
 ---
@@ -797,12 +685,12 @@ With-context stream:<br>
 
 <div class="kicker">NWCAD Gate</div>
 
-# A three-way decision at each token
+# A three-way decision backs off or uses context when confident
 
 <div class="grid-3 mt-6">
 <div>
-<div class="tile blue"><h3>No-context stream</h3><p>p<sub>0</sub><sup>t</sup> represents the model's next-token distribution without the added context.</p></div>
-<div class="tile green mt-4"><h3>With-context stream</h3><p>p<sub>c</sub><sup>t</sup> represents the same prefix conditioned on the added context.</p></div>
+<div class="tile blue"><h3>Stage 1: preserve</h3><p>If context pressure is low and no-context is confident, copy the no-context logits exactly under greedy decoding.</p></div>
+<div class="tile green mt-4"><h3>Stage 2: use context</h3><p>If the context stream is confident, use the context-conditioned logits.</p></div>
 </div>
 <div class="tile amber">
 <h3>Gate signals</h3>
@@ -810,39 +698,13 @@ With-context stream:<br>
 <p class="fine mt-5">Low pressure plus confident no-context favors preservation. Confident context favors context use.</p>
 </div>
 <div>
-<div class="tile blue"><h3>Preserve</h3><p>Copy no-context logits on low-pressure confident steps.</p></div>
-<div class="tile green mt-4"><h3>Use context</h3><p>Use context logits when the context stream is confident.</p></div>
-<div class="tile amber mt-4"><h3>Fallback</h3><p>Use a plug-in contrastive decoder only when neither gate is decisive.</p></div>
+<div class="tile amber"><h3>Fallback</h3><p>Use a plug-in contrastive decoder only when neither gate is decisive.</p></div>
+<div class="tile red mt-4"><h3>Regime selection</h3><p>Context-aware decoding becomes a choice among preservation, context use, and fallback rather than continuous logit tilting.</p></div>
 </div>
 </div>
 
 <div class="takeaway mt-5">
 NWCAD treats context-aware decoding as regime selection rather than continuous logit tilting.
-</div>
-
----
-
-<div class="kicker">NWCAD Logic</div>
-
-# Back off on neutral token steps; use context when confident
-
-<div class="grid-3 mt-7">
-<div class="tile blue">
-<h3>Stage 1</h3>
-<p>If context pressure is low and no-context is confident, copy the no-context logits exactly when Stage 1 applies under greedy decoding.</p>
-</div>
-<div class="tile green">
-<h3>Stage 2</h3>
-<p>If context is confident, use the context stream.</p>
-</div>
-<div class="tile amber">
-<h3>Fallback</h3>
-<p>Otherwise, fall back to a plug-in contrastive decoder when Stage 1 does not apply and the context stream is not sufficiently confident.</p>
-</div>
-</div>
-
-<div class="takeaway mt-8">
-This turns context-aware decoding from continuous tilting into regime selection.
 </div>
 
 ---
@@ -894,36 +756,25 @@ When the context is non-informative and the no-context answer is already correct
 
 ---
 
-<div class="kicker">Component Ablation</div>
+<div class="kicker">Ablations</div>
 
-# Full two-stage NWCAD improves over Stage 1 alone
+# Ablations show both stages and wrapper behavior matter
 
-<div class="grid-2 wide-left mt-5">
+<div class="grid-2 mt-4">
 <div class="media-rail">
-<img src="/assets/nwcad-component-ablation.png" class="media fit-wide">
+<img src="/assets/nwcad-component-ablation.png" class="media short">
+<div class="caption">Component ablation.</div>
 </div>
-<div>
-<div class="tile blue"><h3>Stage 1 only</h3><p>The baseline-correct preservation stage protects baseline-correct neutral cases.</p></div>
-<div class="tile green mt-4"><h3>Full method</h3><p>Stage 2 adds gains when the decoder should use the context rather than ignore it.</p></div>
-<div class="tile amber mt-4"><h3>Takeaway</h3><p>Adding Stage 2 improves performance across the evaluation suite by 5.2% on average.</p></div>
-</div>
-</div>
-
----
-
-<div class="kicker">Adapter Ablation</div>
-
-# NWCAD improves existing two-stream decoders when used as a wrapper
-
-<div class="grid-2 wide-left mt-5">
 <div class="media-rail">
-<img src="/assets/nwcad-adapter.png" class="media fit-wide">
+<img src="/assets/nwcad-adapter.png" class="media short">
+<div class="caption">Adapter ablation.</div>
 </div>
-<div>
-<div class="tile red"><h3>Largest gains</h3><p>Wrapping existing contrastive decoders such as CAD and CoCoA gives large improvements because they are more exposed to neutral regression under distractor pressure.</p></div>
-<div class="tile green mt-4"><h3>Fallback is plug-in</h3><p>NWCAD can use existing decoders such as CAD, AdaCAD, or CoCoA as the Stage-2 fallback.</p></div>
-<div class="tile blue mt-4"><h3>Interpretation</h3><p>The result supports the adapter view: regime selection improves existing two-stream context-aware decoding methods.</p></div>
 </div>
+
+<div class="grid-3 evidence-strip mt-4">
+<div class="tile blue"><h3>Stage 1 protects</h3><p>The baseline-correct preservation stage protects neutral cases.</p></div>
+<div class="tile green"><h3>Stage 2 adds use</h3><p>Adding Stage 2 improves performance across the evaluation suite by 5.2% on average.</p></div>
+<div class="tile red"><h3>Wrapper helps</h3><p>NWCAD improves existing two-stream decoders such as CAD, AdaCAD, and CoCoA when used as a wrapper.</p></div>
 </div>
 
 ---
@@ -1005,10 +856,10 @@ The evaluation target is not just fluent output, but whether the right context c
 # Dissertation contributions
 
 <div class="grid-2 mt-7">
-<div class="tile blue"><h3>Social adaptation</h3><p>CRD shows role-play changes both user behavior and model behavior while exposing persistent assistant defaults.</p></div>
-<div class="tile green"><h3>Knowledge composition</h3><p>WikiAtomic CK/PK analysis shows evidence and memory coexist even in knowledge-consistent settings.</p></div>
-<div class="tile amber"><h3>Multilingual positional grounding</h3><p>CoPE identifies lost-in-the-later across English, Spanish, Danish, and tested order/prompt variations.</p></div>
-<div class="tile red"><h3>Decode-time control</h3><p>NWCAD reduces neutral regression while preserving context utilization.</p></div>
+<div class="tile blue"><h3>Social adaptation</h3><p>CRD makes role-play adaptation measurable through user motive and model naturalness labels.</p></div>
+<div class="tile green"><h3>Knowledge composition</h3><p>WikiAtomic makes generated grounding auditable at the atomic-proposition level.</p></div>
+<div class="tile amber"><h3>Multilingual positional grounding</h3><p>CoPE turns later-context grounding into a multilingual, position-sensitive stress test.</p></div>
+<div class="tile red"><h3>Decode-time control</h3><p>NWCAD gives a decode-time mechanism for reducing neutral regression while preserving context utilization.</p></div>
 </div>
 
 <div class="takeaway mt-5">
