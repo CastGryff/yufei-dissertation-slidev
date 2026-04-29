@@ -74,16 +74,16 @@ mdc: true
 
 <div class="kicker">Motivation</div>
 
-# As LLMs move from research benchmarks into real-world applications, the demands on them change
+# Real-world LLM reliability depends on whether context constrains the output
 
 <div class="grid-2 mt-5">
-<div class="tile green">
-<h3>Faithful to the material it was given</h3>
-<p>A model that summarizes a legal document, assists a medical professional, or answers questions in a retrieval-augmented pipeline is expected to use the supplied evidence.</p>
-</div>
 <div class="tile blue">
 <h3>Fits the social situation</h3>
 <p>A chatbot helping a language learner practice a difficult conversation is expected to respond in a way that fits the social situation.</p>
+</div>
+<div class="tile green">
+<h3>Faithful to supplied evidence</h3>
+<p>A model that summarizes a legal document, assists a medical professional, or answers questions in a retrieval-augmented pipeline is expected to use the supplied evidence.</p>
 </div>
 </div>
 
@@ -100,7 +100,7 @@ mdc: true
 </div>
 
 <div class="takeaway mt-5">
-The same reliability question appears in both cases: does the relevant context constrain the output?
+This dissertation asks whether social and informational context reliably govern what LLMs say.
 </div>
 
 ---
