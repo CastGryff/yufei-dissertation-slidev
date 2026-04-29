@@ -452,7 +452,7 @@ Tests whether grounding remains stable when evidence appears later in the prompt
 
 <div class="kicker">CK Across Languages</div>
 
-# More context helps, but language changes the operating point
+# More context helps, but not equally across languages
 
 <div class="grid-3 mt-5">
 <div class="media-rail"><img src="/assets/lostlater-ck-english.png" class="media short"></div>
@@ -992,7 +992,7 @@ The dissertation gives a unified account of contextual adaptation and knowledge 
 # Future work follows context into working systems
 
 <div class="future-work-thesis mt-4">
-Chapter 9 argues that context is no longer only the text for one response; in agentic systems it becomes an evolving workspace of retrieved evidence, prior turns, notes, tool outputs, files, memory, and state.
+In current LLM systems, context is no longer only the text for one response; it becomes an evolving workspace of retrieved evidence, prior turns, notes, tool outputs, files, memory, and state.
 </div>
 
 <div class="future-specific-list mt-5">

@@ -520,13 +520,28 @@
 }
 
 .citation-list {
+  counter-reset: publication;
   padding: 0.16rem 0.7rem;
   overflow: visible;
 }
 
 .pub-entry {
-  padding: 0.34rem 0 0.38rem;
+  counter-increment: publication;
+  position: relative;
+  padding: 0.34rem 0 0.38rem 1.35rem;
   border-top: 1px solid rgba(22,27,34,0.1);
+}
+
+.pub-entry::before {
+  content: counter(publication) ".";
+  position: absolute;
+  left: 0;
+  top: 0.36rem;
+  color: var(--blue);
+  font-size: 0.52rem;
+  font-weight: 900;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
 }
 
 .pub-entry:first-child {
