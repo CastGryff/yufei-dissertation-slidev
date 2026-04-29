@@ -522,7 +522,9 @@ Most models reach CK scores around 70-75 in English and Spanish, while Danish ha
 
 <div class="fine mt-3">LLaMA 3.2 90B, 50-context setting. CK Prompt explicitly asks for context-grounded answers; CoT refers to chain-of-thought prompting.</div>
 
-<table class="table-lite mt-5">
+<div class="prompt-intervention-layout mt-4">
+<div>
+<table class="table-lite compact prompt-table">
 <thead><tr><th>Prompt</th><th class="num">English</th><th class="num">Spanish</th><th class="num">Danish</th></tr></thead>
 <tbody>
 <tr><td>Original</td><td class="num">70.45</td><td class="num">70.22</td><td class="num">69.33</td></tr>
@@ -533,9 +535,15 @@ Most models reach CK scores around 70-75 in English and Spanish, while Danish ha
 <tr><td>CoT + CK Prompt</td><td class="num">75.10</td><td class="num">78.28</td><td class="num">76.91</td></tr>
 </tbody>
 </table>
+</div>
+<div class="media-rail prompt-recall-panel">
+<img src="/assets/lostlater-prompt-recall.png" class="media prompt-recall">
+<div class="caption mini">English context recall by prompt type and source quartile.</div>
+</div>
+</div>
 
-<div class="takeaway mt-5">
-CoT alone does not match the CK Prompt and lowers context recall relative to the best non-CoT prompt variants; shorter CoT outputs may contribute to this drop.
+<div class="takeaway mt-4">
+CK Prompt produces the strongest CK scores across languages. The recall figure shows the tradeoff: CoT variants do not recover the best non-CoT recall pattern, especially for later context quartiles.
 </div>
 
 ---
@@ -927,91 +935,71 @@ NWCAD improves reliability mainly by selecting between the no-context and contex
 
 ---
 
-<div class="kicker">Limitations</div>
+<div class="kicker">Contributions and Conclusion</div>
 
-# What NWCAD reduces and what remains
+# What this dissertation contributes
 
-<div class="grid-2 mt-8">
-<div class="tile green">
-<h3>What it reduces</h3>
-<p>Reduces a particular downstream consequence of weak grounding: added context making outputs worse when that context is neutral, distracting, or otherwise unhelpful.</p>
-</div>
-<div class="tile red">
-<h3>What remains</h3>
-<p>Does not guarantee full uptake of later evidence, remove multilingual asymmetries, or work directly for black-box APIs without logits.</p>
-</div>
+<div class="synthesis-claim mt-4">
+The dissertation gives a unified account of contextual adaptation and knowledge grounding: current LLMs are context-sensitive, but not fully context-governed.
 </div>
 
----
+<div class="synthesis-contribution-table mt-5">
+<div class="synthesis-head">Study</div>
+<div class="synthesis-head">What I introduced</div>
+<div class="synthesis-head">What it showed</div>
 
-<div class="kicker">Unified Pattern</div>
+<div><span class="tag blue">Role-play</span></div>
+<div>ChatGPT Role-play Dataset and CRD analysis</div>
+<div>Role-play changes behavior, but generic assistant habits remain visible.</div>
 
-# Viewed together, context often behaves like a competing signal
+<div><span class="tag green">CK/PK</span></div>
+<div>WikiAtomic and atomic response content analysis</div>
+<div>Generated responses mix contextual knowledge and parametric memory.</div>
 
-<div class="storyline mt-7">
-<div><span class="tag blue">Social</span></div><div>Role-play changes behavior</div><div>Generic assistant habits persist</div>
-<div><span class="tag green">CK/PK</span></div><div>Evidence changes composition</div><div>Residual PK persists</div>
-<div><span class="tag amber">Position</span></div><div>Later evidence is available</div><div>Earlier evidence dominates recall</div>
-<div><span class="tag red">Decoding</span></div><div>Control can shift behavior</div><div>It does not erase deeper instability</div>
+<div><span class="tag amber">Position</span></div>
+<div>CoPE and lost-in-the-later evaluation</div>
+<div>Relevant evidence is not used equally across context positions and languages.</div>
+
+<div><span class="tag red">Decoding</span></div>
+<div>No-Worse Context-Aware Decoding</div>
+<div>Decode-time routing can reduce neutral regression while preserving helpful context use.</div>
 </div>
 
-<div class="takeaway mt-5">
-The evaluation target is not just fluent output, but whether the right context constrained the output.
-</div>
-
----
-
-<div class="kicker">Contributions</div>
-
-# Dissertation contributions
-
-<div class="grid-2 mt-7">
-<div class="tile blue"><h3>Social adaptation</h3><p>CRD makes role-play adaptation measurable through user motive and model naturalness labels.</p></div>
-<div class="tile green"><h3>Knowledge composition</h3><p>WikiAtomic makes generated grounding auditable at the atomic-proposition level.</p></div>
-<div class="tile amber"><h3>Multilingual positional grounding</h3><p>CoPE turns later-context grounding into a multilingual, position-sensitive stress test.</p></div>
-<div class="tile red"><h3>Decode-time control</h3><p>NWCAD gives a decode-time mechanism for reducing neutral regression while preserving context utilization.</p></div>
-</div>
-
-<div class="takeaway mt-5">
-Together, these contributions support the central claim: context influences current LLMs, but it does not reliably govern them.
-</div>
-
----
-
-<div class="kicker">Conclusion</div>
-
-# Reliable LLM behavior requires measuring whether the right context constrains the output
-
-<div class="grid-3 mt-8">
-<div class="tile blue"><h3>Diagnose</h3><p>Measure where context changes behavior and where defaults persist.</p></div>
-<div class="tile green"><h3>Ground</h3><p>Separate contextual knowledge from parametric knowledge in generated responses.</p></div>
-<div class="tile red"><h3>Control</h3><p>Reduce context-induced regressions while preserving helpful-context gains.</p></div>
-</div>
-
-<div class="takeaway mt-8">
-The dissertation frames role-play, hallucination, multilingual recall, later-context behavior, and decoding control as connected symptoms of one context-use problem.
+<div class="synthesis-close mt-5">
+<strong>Conclusion</strong>
+<span>Reliable LLM behavior should be evaluated by whether the relevant role, evidence, and current informational state constrain what the model says, not only by whether the output is fluent or plausible.</span>
 </div>
 
 ---
 
 <div class="kicker">Future Work</div>
 
-# Next directions for contextual grounding
+# Future work follows context into working systems
 
-<div class="takeaway mt-4">
-Context becomes an evolving workspace of prior turns, files, tool outputs, memory, and evidence.
+<div class="future-work-thesis mt-4">
+Chapter 9 argues that context is no longer only the text for one response; in agentic systems it becomes an evolving workspace of retrieved evidence, prior turns, notes, tool outputs, files, memory, and state.
 </div>
 
-<div class="grid-2 mt-6">
-<div class="tile blue"><h3>Multi-agent knowledge systems</h3><p>Evaluate whether agents maintain a grounded account of what is known, uncertain, superseded, and evidence-backed.</p></div>
-<div class="tile green"><h3>Context navigation</h3><p>Measure whether systems can recover, compare, and revise the relevant evidence needed for the next decision.</p></div>
-<div class="tile amber"><h3>Context focus and control</h3><p>Study how retrieval, memory, prompting, and decoding preserve or weaken grounding across a pipeline.</p></div>
-<div class="tile red"><h3>Memory, retrieval, tools, and action</h3><p>Judge systems not only by task completion, but by whether they remain grounded while acting over extended trajectories.</p></div>
+<div class="future-specific-list mt-5">
+<div class="future-specific-row blue">
+<span>Multi-agentic knowledge systems</span>
+<p>Test whether planner, verifier, critic, and synthesizer roles maintain shared knowledge state with provenance, uncertainty, and superseded claims.</p>
+</div>
+<div class="future-specific-row green">
+<span>Context navigation and utilization</span>
+<p>Measure whether systems recover, compare, and revise evidence across files, retrieved passages, prior turns, memories, and intermediate artifacts.</p>
+</div>
+<div class="future-specific-row amber">
+<span>Interventions for context focus and control</span>
+<p>Connect prompt design, retrieval organization, memory management, and NWCAD-style non-regression principles in one reliability framework.</p>
+</div>
+<div class="future-specific-row red">
+<span>AgentOS-style systems</span>
+<p>Judge memory, retrieval, tools, code, and action by whether working knowledge stays tethered to the most relevant and best-supported evidence.</p>
+</div>
 </div>
 
-<div class="takeaway mt-6">
-The next step is to evaluate whether context governs the construction and use of working knowledge, not only the final generated answer.
-</div>
+<div class="takeaway mt-5">The next step is to evaluate whether context governs working knowledge over time, not only the final generated answer.</div>
 
 ---
 
@@ -1051,56 +1039,4 @@ This dissertation argues for moving context from an input that merely influences
 </div>
 
 <div class="byline mt-12">Thank you.</div>
-</div>
-
----
-
-<div class="kicker">Backup | Study 2 Robustness</div>
-
-# CK/PK trends persist under evaluator and prompt checks
-
-<div class="grid-2 mt-7">
-<div class="tile green"><h3>Ambiguous-score filtering</h3><p>Removing sentences with INFUSE scores between 0.3 and 0.7 preserves the main CK/PK patterns.</p></div>
-<div class="tile amber"><h3>Alternative metrics</h3><p>ROUGE, METEOR, and partial-match checks show similar broad patterns in preliminary comparisons.</p></div>
-<div class="tile blue"><h3>Prompt sensitivity</h3><p>No-restrict and strict prompts change CK/PK ratios, confirming that the semi-restrict prompt is a controlled choice.</p></div>
-<div class="tile red"><h3>Newer knowledge check</h3><p>A recent-event probe tests behavior when supplied context contains information less likely to be represented in pretraining.</p></div>
-</div>
-
-<div class="fine mt-5">Backup slide for committee questions about whether the CK/PK measurement depends on a single threshold, metric, or prompt form.</div>
-
----
-
-<div class="kicker">Backup | CoPE Validation</div>
-
-# CoPE calibration checks the multilingual grounding measure
-
-<div class="grid-4 mt-7">
-<div class="metric blue"><div class="value">50</div><div class="label">outputs per model / language</div></div>
-<div class="metric green"><div class="value">0.7</div><div class="label">selected entailment threshold</div></div>
-<div class="metric amber"><div class="value">66.66%</div><div class="label">synthetic CK target</div></div>
-<div class="metric red"><div class="value">~66.9%</div><div class="label">observed CK estimate</div></div>
-</div>
-
-<div class="grid-3 mt-7">
-<div class="tile blue"><h3>Human calibration</h3><p>Three annotators checked CK/PK labels across English, Spanish, and Danish.</p></div>
-<div class="tile green"><h3>Synthetic check</h3><p>Constructed responses with 10 CK and 5 unrelated sentences recover the expected CK rate.</p></div>
-<div class="tile amber"><h3>Threshold robustness</h3><p>Filtering ambiguous scores in p ∈ [0.4, 0.8] preserves the main trends.</p></div>
-</div>
-
----
-
-<div class="kicker">Backup | NWCAD Settings</div>
-
-# Thresholds and JS approximation are checked directly
-
-<div class="grid-4 mt-7">
-<div class="metric blue"><div class="value">τ=.30</div><div class="label">neutrality threshold</div></div>
-<div class="metric green"><div class="value">κ<sub>pri</sub>=.30</div><div class="label">no-context margin</div></div>
-<div class="metric amber"><div class="value">κ<sub>ctx</sub>=.05</div><div class="label">context margin</div></div>
-<div class="metric red"><div class="value">K=50</div><div class="label">top-K union JS</div></div>
-</div>
-
-<div class="grid-2 mt-7">
-<div class="tile blue"><h3>Transfer</h3><p>Defaults are tuned once on Llama-3.1-8B controlled slices and reused for Llama-3.1-70B and Ministral-3-8B.</p></div>
-<div class="tile green"><h3>Top-K sanity check</h3><p>On 150 controlled examples and 784 generated tokens, K = 50 matches full-vocabulary JS for neutrality and Stage-1 decisions with zero routing flips.</p></div>
 </div>
