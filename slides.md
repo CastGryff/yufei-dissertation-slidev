@@ -725,53 +725,6 @@ Neutral regression occurs when the model overwrites an already-correct answer ev
 <div class="fine mt-3">Restate-hard and Distractor-hard measure do-no-harm preservation; Helpful measures whether the decoder still uses genuinely useful evidence.</div>
 
 ---
-
-<div class="kicker">Controlled Analysis</div>
-
-# Neutral slices expose context-induced drops
-
-<div class="grid-2 wide-left nwcad-analysis-layout mt-4">
-<div class="media-rail"><img src="/assets/nwcad-neutral-regression.png" class="media nwcad-regression-figure"></div>
-<div>
-<div class="tile blue"><h3>Restate-hard</h3><p>With-context decoding is slightly worse even when the added passage restates the gold answer.</p></div>
-<div class="tile red mt-4"><h3>Distractor-hard</h3><p>The same context pressure creates a much larger drop when the added passage is type-matched but non-entailing.</p></div>
-<div class="tile green mt-4"><h3>Helpful</h3><p>Context is still valuable when the no-context answer is wrong; a pure backoff would lose these gains.</p></div>
-</div>
-</div>
-
-<div class="takeaway nwcad-analysis-takeaway mt-3">
-The method therefore needs two behaviors at once: protect baseline-correct neutral cases while preserving useful context gains.
-</div>
-
----
-
-<div class="kicker">Trade-off</div>
-
-# We cannot simply always lean toward model knowledge
-
-<div class="tradeoff-plane mt-5">
-<div class="axis-y">Preservation</div>
-<div class="axis-x">Context utilization</div>
-<div class="trade-zone preserve">Preserve baseline-correct answers</div>
-<div class="trade-zone use">Use genuinely corrective context</div>
-<div class="trade-point noctx">No-context</div>
-<div class="trade-point ctx">With-context</div>
-<div class="trade-point cad">Context-shifted decoder</div>
-<div class="trade-point nwcad">NWCAD</div>
-</div>
-
-<div class="grid-2 mt-4">
-<div class="tile blue">
-<h3>Pure backoff is too conservative</h3>
-<p>It protects baseline-correct answers, but it would miss examples where the context contains the missing evidence.</p>
-</div>
-<div class="tile green">
-<h3>Pure context pressure is too aggressive</h3>
-<p>It can use useful evidence, but it can also overreact to distractor passages.</p>
-</div>
-</div>
-
----
 class: helpful-context-slide
 ---
 
@@ -802,17 +755,36 @@ class: helpful-context-slide
 
 <div class="helpful-tension mt-5">
 <div>
-<span>Design tension</span>
-<strong>Use helpful evidence without causing neutral regression.</strong>
+<span>Context utilization</span>
+<strong>If the baseline is wrong and the passage supplies evidence, the decoder should follow context.</strong>
 </div>
 <div class="helpful-formula">
-<b>Preserve neutral</b>
+<b>Baseline wrong</b>
 <i>+</i>
-<b>Use helpful</b>
+<b>Evidence supplied</b>
 <i>-></i>
-<b>No-worse decoding</b>
+<b>Use context</b>
 </div>
 </div>
+</div>
+
+---
+
+<div class="kicker">Controlled Analysis</div>
+
+# The controlled slices reveal the trade-off
+
+<div class="grid-2 wide-left nwcad-analysis-layout mt-4">
+<div class="media-rail"><img src="/assets/nwcad-neutral-regression.png" class="media nwcad-regression-figure"></div>
+<div>
+<div class="tile blue"><h3>Neutral preservation</h3><p>Restate-hard and Distractor-hard expose avoidable drops from added context when the no-context answer was already correct.</p></div>
+<div class="tile green mt-4"><h3>Context utilization</h3><p>Helpful shows why always backing off to the no-context stream is too conservative.</p></div>
+<div class="tile red mt-4"><h3>Design target</h3><p>Preserve baseline-correct neutral cases while still using genuinely helpful evidence.</p></div>
+</div>
+</div>
+
+<div class="takeaway nwcad-analysis-takeaway mt-3">
+NWCAD is designed for this trade-off: avoid context-induced regressions without giving up context-supported corrections.
 </div>
 
 ---
