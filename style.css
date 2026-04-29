@@ -846,6 +846,101 @@
   object-fit: contain;
 }
 
+.neutral-definition-flow {
+  display: grid;
+  grid-template-columns: 1fr 2.1rem 1fr 2.1rem 1fr;
+  gap: 0.55rem;
+  align-items: stretch;
+}
+
+.neutral-step {
+  border: 1px solid var(--hair);
+  border-top: 5px solid var(--blue);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.94);
+  padding: 0.7rem 0.78rem;
+  min-height: 8.2rem;
+  box-shadow: 0 14px 30px rgba(47,64,82,0.05);
+}
+
+.neutral-step.amber {
+  border-top-color: var(--amber);
+}
+
+.neutral-step.red {
+  border-top-color: var(--red);
+}
+
+.neutral-step span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.56rem;
+  line-height: 1;
+  font-weight: 860;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.neutral-step strong {
+  display: block;
+  color: var(--ink);
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.08;
+  font-weight: 860;
+}
+
+.neutral-step p {
+  margin: 0.48rem 0 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.16;
+}
+
+.neutral-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 1.55rem;
+  font-weight: 760;
+}
+
+.media.nwcad-regression-figure {
+  width: 100%;
+  max-height: 16.8rem;
+  object-fit: contain;
+}
+
+.nwcad-analysis-layout {
+  gap: 0.7rem;
+}
+
+.nwcad-analysis-layout .media-rail {
+  padding: 0.24rem;
+}
+
+.nwcad-analysis-layout .tile {
+  padding: 0.5rem 0.6rem;
+}
+
+.nwcad-analysis-layout .tile h3 {
+  font-size: 0.78rem;
+  line-height: 1.05;
+}
+
+.nwcad-analysis-layout .tile p {
+  font-size: 0.64rem;
+  line-height: 1.12;
+  margin-top: 0.25rem;
+}
+
+.nwcad-analysis-takeaway {
+  padding: 0.46rem 0.68rem;
+  font-size: 0.76rem;
+  line-height: 1.18;
+}
+
 .evidence-strip {
   gap: 0.55rem;
 }
@@ -1469,6 +1564,77 @@
   background: rgba(255,255,255,0.94);
   padding: 0.78rem 0.9rem;
   box-shadow: 0 16px 34px rgba(47,64,82,0.07);
+}
+
+.controlled-slice-grid {
+  gap: 0.55rem;
+}
+
+.controlled-slice-grid .tile {
+  padding: 0.52rem 0.6rem;
+}
+
+.controlled-slice-grid .tile h3,
+.controlled-example .tile h3 {
+  font-size: 0.76rem;
+  line-height: 1.05;
+}
+
+.controlled-slice-grid .tile p,
+.controlled-example .tile p {
+  color: var(--muted);
+  font-size: 0.61rem;
+  line-height: 1.14;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 650;
+}
+
+.controlled-example {
+  padding: 0.58rem 0.72rem;
+}
+
+.controlled-example .grid-2 {
+  gap: 0.62rem;
+}
+
+.controlled-example .tile {
+  padding: 0.48rem 0.58rem;
+}
+
+.controlled-gold {
+  display: grid;
+  grid-template-columns: 6.2rem 8.2rem 1fr;
+  gap: 0.55rem;
+  align-items: center;
+  border: 1px solid rgba(22,27,34,0.1);
+  border-left: 5px solid var(--green);
+  border-radius: 5px;
+  background: rgba(243,249,247,0.82);
+  padding: 0.38rem 0.55rem;
+}
+
+.controlled-gold span {
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.controlled-gold strong {
+  color: var(--ink);
+  font-size: 0.82rem;
+  line-height: 1.05;
+  font-weight: 860;
+}
+
+.controlled-gold em {
+  color: var(--muted);
+  font-size: 0.6rem;
+  line-height: 1.12;
+  font-style: normal;
+  font-weight: 650;
 }
 
 .nwcad-opener .neutral-example {

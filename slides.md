@@ -580,7 +580,7 @@ Can a context-aware decoder use added context without making already-correct ans
 <div class="neutral-example mt-3">
 <div class="example-question">Q: When did the U.S. normalize relations with China?</div>
 <div class="nwcad-context-excerpt mt-3">
-<span>Added distractor context excerpt</span>
+<span>Added non-entailing context excerpt</span>
 <p>Although the process culminated in a major announcement in 1978, it reflected decades of evolving U.S.-China relations.</p>
 </div>
 <div class="answer-compare mt-3">
@@ -658,47 +658,90 @@ $$
 
 # Neutral regression names the failure
 
-<div class="grid-2 wide-right mt-5">
-<div>
-<div class="tile red"><h3>Definition</h3><p>Neutral regression occurs when the model overwrites an already-correct answer even though the added context is effectively non-informative.</p></div>
-<div class="tile blue mt-4"><h3>Controlled filter</h3><p>Baseline-correct filtering makes no-context accuracy 100% by construction.</p></div>
-<div class="tile amber mt-4"><h3>Regression signal</h3><p>Within baseline-correct neutral cases, any drop under with-context decoding is an avoidable context-induced regression.</p></div>
+<div class="neutral-definition-flow mt-6">
+<div class="neutral-step blue">
+<span>Start</span>
+<strong>No-context answer is already correct</strong>
+<p>Baseline-correct filtering makes no-context accuracy 100% by construction.</p>
 </div>
-<div class="media-rail"><img src="/assets/nwcad-neutral-regression.png" class="media tall"></div>
+<div class="neutral-arrow">+</div>
+<div class="neutral-step amber">
+<span>Add context</span>
+<strong>The added context is effectively non-informative</strong>
+<p>It should not require changing the answer.</p>
+</div>
+<div class="neutral-arrow">→</div>
+<div class="neutral-step red">
+<span>Failure</span>
+<strong>With-context decoding makes the answer worse</strong>
+<p>That avoidable context-induced drop is neutral regression.</p>
+</div>
+</div>
+
+<div class="takeaway red mt-6">
+Neutral regression occurs when the model overwrites an already-correct answer even though the added context does not entail a needed correction.
 </div>
 
 ---
 
 <div class="kicker">Controlled Benchmark</div>
 
-# Restate-hard and Distractor-hard make neutral regression measurable
+# The slices define what the decoder should do
 
-<div class="grid-2 mt-6">
+<div class="grid-3 controlled-slice-grid mt-4">
 <div class="tile blue">
 <h3>Restate-hard</h3>
-<p>The added passage is aligned with the gold answer, but the example is still filtered to cases where the no-context answer was already correct.</p>
+<p>The no-context answer is already correct. The added passage restates the same gold fact. Expected behavior: keep the answer.</p>
 </div>
 <div class="tile red">
 <h3>Distractor-hard</h3>
-<p>The added passage creates type-matched pressure without entailing the gold answer, making overreaction easy to observe.</p>
+<p>The no-context answer is already correct. The added passage gives type-matched but non-entailing pressure. Expected behavior: ignore it.</p>
+</div>
+<div class="tile green">
+<h3>Helpful</h3>
+<p>The no-context answer is wrong. The added passage contains the gold answer. Expected behavior: use the context.</p>
 </div>
 </div>
 
-<div class="neutral-example mt-5">
-<div class="example-question">Gold answer: March 1, 1781</div>
+<div class="neutral-example controlled-example mt-4">
+<div class="example-question">Q: When were the Articles of Confederation put into effect?</div>
+<div class="controlled-gold mt-2">
+<span>Gold answer</span>
+<strong>March 1, 1781</strong>
+<em>For Restate-hard and Distractor-hard, this is also the answer the model already gives without context.</em>
+</div>
 <div class="grid-2 mt-3">
 <div class="tile blue">
-<h3>Restated context</h3>
-<p>The Articles of Confederation officially went into effect on March 1, 1781, marking the first governing framework for the newly independent states.</p>
+<h3>Restate-hard context</h3>
+<p>The passage says March 1, 1781. It should reinforce the already-correct answer, not change it.</p>
 </div>
 <div class="tile red">
-<h3>Distractor context</h3>
-<p>The Articles of Confederation were drafted in 1777, and it took until 1780 for all states to ratify the articles.</p>
+<h3>Distractor-hard context</h3>
+<p>The passage mentions nearby years, 1777 and 1780, but does not entail the gold answer. Following it is overreaction.</p>
 </div>
 </div>
 </div>
 
-<div class="fine mt-4">Both neutral slices are baseline-correct by design; helpful examples are introduced separately to test context utilization.</div>
+<div class="fine mt-3">Restate-hard and Distractor-hard measure do-no-harm preservation; Helpful measures whether the decoder still uses genuinely useful evidence.</div>
+
+---
+
+<div class="kicker">Controlled Analysis</div>
+
+# Neutral slices expose context-induced drops
+
+<div class="grid-2 wide-left nwcad-analysis-layout mt-4">
+<div class="media-rail"><img src="/assets/nwcad-neutral-regression.png" class="media nwcad-regression-figure"></div>
+<div>
+<div class="tile blue"><h3>Restate-hard</h3><p>With-context decoding is slightly worse even when the added passage restates the gold answer.</p></div>
+<div class="tile red mt-4"><h3>Distractor-hard</h3><p>The same context pressure creates a much larger drop when the added passage is type-matched but non-entailing.</p></div>
+<div class="tile green mt-4"><h3>Helpful</h3><p>Context is still valuable when the no-context answer is wrong; a pure backoff would lose these gains.</p></div>
+</div>
+</div>
+
+<div class="takeaway nwcad-analysis-takeaway mt-3">
+The method therefore needs two behaviors at once: protect baseline-correct neutral cases while preserving useful context gains.
+</div>
 
 ---
 
