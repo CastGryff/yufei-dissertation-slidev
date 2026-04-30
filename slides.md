@@ -961,32 +961,32 @@ The dissertation gives a unified account of contextual adaptation and knowledge 
 
 <div class="kicker">Future Work</div>
 
-# Future work: make context reliable in working systems
+# Future work: when context becomes the workspace
 
 <div class="future-work-thesis mt-4">
-In deployed LLM systems, context is not just one prompt. It becomes a working state: retrieved evidence, prior turns, notes, tool outputs, files, memory, and decisions carried forward.
+The next reliability problem is not one answer to one prompt. It is whether the whole system can keep track of what it knows while it reads, delegates, revises, and acts.
 </div>
 
 <div class="future-specific-list mt-5">
 <div class="future-specific-row blue">
 <span>Multi-agentic knowledge systems</span>
-<p>Study whether planner, verifier, critic, and writer agents can keep shared state with support, uncertainty, outdated claims, and contradictions.</p>
+<p><strong>How do agent teams keep shared knowledge clean?</strong> Study when guesses, summaries, or outdated claims become accepted facts. Example: a coding agent drifts because an early task interpretation keeps getting reused.</p>
 </div>
 <div class="future-specific-row green">
-<span>Context navigation in file/tool workflows</span>
-<p>Measure whether systems find and reuse the correct file, passage, memory, or prior turn before making the next decision.</p>
+<span>Context navigation and utilization</span>
+<p><strong>Where is the right context?</strong> Build workspace-style tasks where evidence is scattered across files, logs, retrieved passages, prior turns, and tool outputs, then test whether the system uses the right source.</p>
 </div>
 <div class="future-specific-row amber">
-<span>Evidence revision and context control</span>
-<p>Evaluate prompts, retrieval, memory, and decoding interventions that let later evidence revise earlier conclusions without breaking correct baseline behavior.</p>
+<span>Interventions for context focus and control</span>
+<p><strong>Extend the no-worse idea beyond NWCAD.</strong> Design ways to decide what stays active, what gets revisited, and when new evidence is strong enough to revise the system's current belief.</p>
 </div>
 <div class="future-specific-row red">
-<span>AgentOS-style system evaluation</span>
-<p>Judge whether memory, retrieval, tools, code, and action stay grounded in the best available evidence across extended workflows.</p>
+<span>Toward AgentOS-style systems</span>
+<p><strong>AgentOS-style means the system layer around the model.</strong> It coordinates memory, files, tools, permissions, checkpoints, and source traces: what the agent can use, what it remembers, and what users can inspect or challenge.</p>
 </div>
 </div>
 
-<div class="takeaway mt-5">Impact: future RAG systems, agents, and coding assistants should be judged by whether their working knowledge stays tied to the best available evidence over time.</div>
+<div class="takeaway mt-5">Impact: future RAG systems, agents, and coding assistants should be judged not only by whether they finish the task, but by whether we can trace, revise, and challenge what they think they know.</div>
 
 ---
 
